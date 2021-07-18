@@ -26,7 +26,7 @@ int Ball::findPlatform(std::deque<Platform *> platforms)
             if (circle.getPosition().x + circle.getRadius() > platforms[i]->sprite.getPosition().x)
                 if (circle.getPosition().x - circle.getRadius() < platforms[i]->sprite.getPosition().x + platforms[i]->getWidth())
                 {
-                    if (platforms[i]->getPlatformType() == spike)
+                    if (platforms[i]->getPlatformType() == spike || platforms[i]->getPlatformType() == movingspike)
                         return 3 * (!isProtected);
                     standingOn = platforms[i];
                     platforms[i]->setballx(circle.getPosition().x);

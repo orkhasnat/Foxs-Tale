@@ -12,6 +12,7 @@ int main()
     int choice;
 
     window.create(sf::VideoMode(1280, 720), "Rapid Roll Advanced");
+    icon();
     intro();
 
     while (window.isOpen())
