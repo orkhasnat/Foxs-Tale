@@ -9,8 +9,7 @@ Platform::Platform(int x, const ItemType _itemtype) : width(50 + rand() % 21 + r
             x = 1200 - width;
     }
 
-    sf::Texture texture;
-    texture.loadFromFile("img/Platform.jpg");
+    texture.loadFromFile("data/img/Platform.jpg");
     sprite.setTexture(texture);
     sprite.setTextureRect(sf::IntRect(0, 0, width, 10));
     sprite.setColor(sf::Color::Black);

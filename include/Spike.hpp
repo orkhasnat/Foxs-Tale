@@ -6,6 +6,6 @@
 class Spike : public Platform
 {
 public:
-    Spike(const int);
+    Spike(int);
 };
 #endif

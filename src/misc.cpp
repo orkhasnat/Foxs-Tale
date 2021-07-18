@@ -1,9 +1,16 @@
 #include "misc.hpp"
 
+int bg = 0;
+sf::RenderWindow window;
+sf::Event event;
+sf::Clock clk;
+sf::Music music;
+sf::Font arial;
+
 void icon()
 {
     sf::Image logo;
-    logo.loadFromFile("img/icon.png");
+    logo.loadFromFile("data/img/icon.png");
 
     window.setIcon(logo.getSize().x, logo.getSize().y, logo.getPixelsPtr());
 }
@@ -15,7 +22,7 @@ void intro(void)
     int cover = rand() % 18;
 
     sf::Music sound;
-    sound.openFromFile("audio/intro.ogg");
+    sound.openFromFile("data/audio/intro.ogg");
     sound.setLoop(0);
     sound.setVolume(10);
     sound.play();
@@ -39,7 +46,7 @@ void intro(void)
             }
         }
 
-        texture.loadFromFile("img/intro/" + std::to_string(cover) + ".jpg");
+        texture.loadFromFile("data/img/intro/" + std::to_string(cover) + ".jpg");
         sprite.setTexture(texture);
         window.draw(sprite);
         window.display();
@@ -85,7 +92,7 @@ void drawbg()
     window.clear();
 
     sf::Texture texture;
-    texture.loadFromFile("img/bg/" + std::to_string(bg & 7) + ".jpg");
+    texture.loadFromFile("data/img/bg/" + std::to_string(bg & 7) + ".jpg");
     sf::Sprite sprite;
     sprite.setTexture(texture);
 

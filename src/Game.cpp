@@ -19,42 +19,38 @@ void Game::newPlatform(PlatformType platformtype = regular)
         temp = 0;
 
     ItemType itemtype = nothing;
-    switch (rand() % 100)
+
     {
-    case 0 ... 10:
-        if (!score)
-            break;
-        itemtype = coin;
-        break;
-
-    case 11 ... 15:
-        if (!score)
-            break;
-        itemtype = booster;
-        break;
-
-    case 16 ... 20:
-        if (!score)
-            break;
-        itemtype = invincibility;
-        break;
-
-    case 21 ... 25:
-        if (!score)
-            break;
-        if (runspeed < 3)
-            break;
-        itemtype = slowdown;
-        break;
-
-    case 97:
-        if (!score)
-            break;
-        if (score > 4000)
-            if (rand() & 3)
-                break;
-        itemtype = gem;
-        break;
+        int tempRandom = rand() % 100;
+        if ((tempRandom >= 0) && (tempRandom < 11))
+        {
+            if (score)
+                itemtype = coin;
+        }
+        else if ((tempRandom >= 11) && (tempRandom < 16))
+        {
+            if (score)
+                itemtype = booster;
+        }
+        else if ((tempRandom >= 16) && (tempRandom < 21))
+        {
+            if (score)
+                itemtype = invincibility;
+        }
+        else if ((tempRandom >= 21) && (tempRandom < 26))
+        {
+            if (score && runspeed > 2)
+                itemtype = slowdown;
+        }
+        else if (tempRandom == 97)
+        {
+            if (score)
+            {
+                if (score > 4000)
+                    if (!(rand() & 3))
+                        itemtype = gem;
+            }
+        }
     }
 
     switch (platformtype)
@@ -213,6 +209,7 @@ void Game::draw() const
     drawremaining();
     drawscore();
     window.draw(frame);
+    window.draw(spikes);
     for (int i = 0; i < platforms.size(); i++)
     {
         window.draw(platforms[i]->sprite);
@@ -302,7 +299,7 @@ void Game::fall()
         return;
     }
 
-    temp = ball->weight;
+    temp = 20;
     while (temp > 10)
     {
         ball->circle.move(0, 10);
@@ -406,7 +403,8 @@ void Game::burst()
 
     burstingBall.play();
     while (burstingBall.getStatus() == sf::Music::Playing)
-        pause();
+        ;
+    pause();
 }
 
 // public funcs
@@ -423,7 +421,12 @@ Game::Game() : score(0), life(3), runspeed(1), slowdowntime(0)
     frame.setOutlineThickness(5);
     frame.setPosition(800, 100);
 
-    playing.openFromFile("audio/playing.ogg");
+    texture.loadFromFile("data/img/Spikes_Flip.png");
+    spikes.setTexture(texture);
+    spikes.setTextureRect(sf::IntRect(0, 0, 400, 10));
+    spikes.setPosition(800, 100);
+
+    playing.openFromFile("data/audio/playing.ogg");
     playing.setVolume(10);
     playing.setLoop(true);
 }
@@ -432,6 +435,8 @@ Game::~Game()
 {
     for (int i = 0; i < platforms.size(); i++)
         delete platforms[i];
+    if (ball)
+        delete ball;
 }
 
 int Game::getScore() const

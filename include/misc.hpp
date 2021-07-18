@@ -5,6 +5,13 @@
 #include <SFML/Audio.hpp>
 #include <iostream>
 
+extern int bg;
+extern sf::RenderWindow window;
+extern sf::Event event;
+extern sf::Clock clk;
+extern sf::Music music;
+extern sf::Font arial;
+
 enum PlatformType
 {
     regular,

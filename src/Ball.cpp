@@ -1,6 +1,6 @@
 #include "Ball.hpp"
 
-Ball::Ball(Platform *platform) : standingOn(platform), isBouncing(0), isProtected(0), isBoosted(0), weight(20)
+Ball::Ball(Platform *platform) : standingOn(platform), isBouncing(0), isProtected(0), isBoosted(0)
 {
     circle.setRadius(7);
     circle.setOutlineThickness(1);

@@ -12,11 +12,12 @@
 class Platform
 {
 protected:
-    const int width;
+    int width;
     int ballx;
     Item *item;
     PlatformType platformtype;
     ItemType itemtype;
+    sf::Texture texture;
 
 public:
     sf::Sprite sprite;

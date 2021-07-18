@@ -16,6 +16,8 @@ private:
     std::deque<Platform *> platforms;
     Ball *ball;
     sf::RectangleShape frame;
+    sf::Texture texture;
+    sf::Sprite spikes;
     sf::Music playing;
     friend void Coin::bonus(int *_score);
     friend void Gem::bonus(int *_life);

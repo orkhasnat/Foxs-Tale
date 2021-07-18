@@ -8,7 +8,6 @@
 
 class Ball
 {
-    const int weight;
     int isBouncing, isProtected, isBoosted;
     Platform *standingOn;
     friend class Game;
