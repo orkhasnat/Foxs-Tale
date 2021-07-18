@@ -10,7 +10,7 @@ sf::Font arial;
 void icon()
 {
     sf::Image logo;
-    logo.loadFromFile("data/img/icon.png");
+    logo.loadFromFile("data/img/RR.png");
 
     window.setIcon(logo.getSize().x, logo.getSize().y, logo.getPixelsPtr());
 }
