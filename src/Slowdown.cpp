@@ -1,5 +1,10 @@
 #include "Slowdown.hpp"
 
+SlowDown::SlowDown(int _x)
+{
+    setSprite(_x);
+}
+
 void SlowDown::setSprite(const int x)
 {
     sf::Texture texture;
@@ -10,12 +15,7 @@ void SlowDown::setSprite(const int x)
     sprite.setPosition(x, 680);
 }
 
-SlowDown::SlowDown(int _x)
-{
-    setSprite(_x);
-}
-
 void SlowDown::bonus(int *_slowdowntime)
 {
-    *_slowdowntime += 19 + (rand() & 31);
+    *_slowdowntime+=19+(rand()&31);
 }

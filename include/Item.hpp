@@ -6,11 +6,11 @@
 class Item
 {
 protected:
-    virtual void setSprite(const int x) = 0;
+    virtual void setSprite(const int)=0;
 
 public:
     sf::Sprite sprite;
-    virtual void bonus(int *stat) = 0;
+    virtual void bonus(int*)=0;
 };
 
 #endif

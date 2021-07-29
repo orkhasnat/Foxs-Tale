@@ -9,7 +9,7 @@ class Gem : public Item
 
 public:
     Gem(int);
-    void bonus(int *);
+    void bonus(int*);
 };
 
 #endif

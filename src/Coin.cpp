@@ -1,5 +1,10 @@
 #include "Coin.hpp"
 
+Coin::Coin(int _x)
+{
+    setSprite(_x);
+}
+
 void Coin::setSprite(const int x)
 {
     sf::Texture texture;
@@ -9,12 +14,8 @@ void Coin::setSprite(const int x)
     sprite.setColor(sf::Color::Yellow);
     sprite.setPosition(x, 680);
 }
-Coin::Coin(int _x)
-{
-    setSprite(_x);
-}
 
 void Coin::bonus(int *_score)
 {
-    *_score += 100 + rand() % 200;
+    *_score+=100+rand()%200;
 }

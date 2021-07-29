@@ -1,5 +1,10 @@
 #include "Boost.hpp"
 
+Boost::Boost(int _x)
+{
+    setSprite(_x);
+}
+
 void Boost::setSprite(const int x)
 {
     sf::Texture texture;
@@ -10,12 +15,7 @@ void Boost::setSprite(const int x)
     sprite.setPosition(x, 680);
 }
 
-Boost::Boost(int _x)
-{
-    setSprite(_x);
-}
-
 void Boost::bonus(int *_isBoosted)
 {
-    *_isBoosted += 19 + (rand() & 31);
+    *_isBoosted+=19+(rand()&31);
 }

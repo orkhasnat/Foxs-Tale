@@ -1,6 +1,6 @@
-//#include <iostream>
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
+#include <bits/stdc++.h>
+#include "SFML/Graphics.hpp"
+#include "SFML/Audio.hpp"
 #include "Game.hpp"
 #include "misc.hpp"
 
@@ -9,34 +9,49 @@ int main()
     srand(time(0));
     arial.loadFromFile("data/font/arial.ttf");
 
-    int choice;
-
     window.create(sf::VideoMode(1280, 720), "Rapid Roll Advanced");
     icon();
     intro();
 
-    while (window.isOpen())
-    {
-        choice = menu();
+    int choice;
 
-        if (choice == 1)
+    /*std::set<pair<int,string>> records;
+    open file High_Score.txt in read mode
+    readrecords(records, filepointer) // Read from High_Score.txt into records (set)
+    close file pointer*/
+
+    while(window.isOpen())
+    {
+        choice=menu();
+
+        if(choice==1)
         {
             Game game;
             game.run();
-            //Save records
+
+            std::cout << "Your Score: " << game.getScore() << '\n';
+
+            /*IF highscore.size()<10
+                highscore.insert(game.getScore(), getPlayerName())
+            ELSE IF game.getScore()>*(highscore.begin()).first
+                highscore.erase(highscore.begin())
+                highscore.insert(game.getScore(), getPlayerName())
+            Don't need to do anything with the file*/
         }
 
-        else if (choice == 2)
+        else if(choice==2)
         {
             //high scores
+
+            //Display High Scores in the window from records (set) in reversed order
         }
 
-        else if (choice == 3)
+        else if(choice==3)
         {
             //instructions
         }
 
-        else if (choice == 4)
+        else if(choice==4)
         {
             //credits
 
@@ -46,9 +61,12 @@ int main()
             std::cout << "Music:\n\"Gravity Falls Main Title Theme\"\nBy Brad Breeck\nFrom Gravity Falls- Created By Alex Hirsh\nA Television Animation By Disney\n\n";
         }
 
-        else
-            window.close();
+        else window.close();
     }
+
+    /*open file High_Score.txt in write mode
+    writerecords(records, filepointer) // Clear High_Score.txt and then Write into High_Score.txt from records (set)
+    close file pointer*/
 
     return 0;
 }

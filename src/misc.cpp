@@ -1,6 +1,6 @@
 #include "misc.hpp"
 
-int bg = 0;
+int bg=0;
 sf::RenderWindow window;
 sf::Event event;
 sf::Clock clk;
@@ -9,17 +9,17 @@ sf::Font arial;
 
 void icon()
 {
-    sf::Image logo;
-    logo.loadFromFile("data/img/RR.png");
+    sf::Image Icon;
+    Icon.loadFromFile("data/img/RR.png");
 
-    window.setIcon(logo.getSize().x, logo.getSize().y, logo.getPixelsPtr());
+    window.setIcon(Icon.getSize().x, Icon.getSize().y, Icon.getPixelsPtr());
 }
 
-void intro(void)
+void intro()
 {
     sf::Texture texture;
     sf::Sprite sprite;
-    int cover = rand() % 18;
+    int cover=rand()%18;
 
     sf::Music sound;
     sound.openFromFile("data/audio/intro.ogg");
@@ -27,26 +27,25 @@ void intro(void)
     sound.setVolume(10);
     sound.play();
 
-    while (sound.getStatus() == sf::Music::Playing)
+    while(sound.getStatus()==sf::Music::Playing)
     {
-        while (window.pollEvent(event))
+        while(window.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed)
+            if(event.type==sf::Event::Closed)
             {
                 window.close();
                 return;
             }
 
-            if (event.type == sf::Event::KeyPressed || (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left))
+            if(event.type==sf::Event::KeyPressed || (event.type==sf::Event::MouseButtonPressed && event.mouseButton.button==sf::Mouse::Left))
             {
-                sound.stop();
                 window.clear();
                 window.display();
                 return;
             }
         }
 
-        texture.loadFromFile("data/img/intro/" + std::to_string(cover) + ".jpg");
+        texture.loadFromFile("data/img/intro/"+std::to_string(cover)+".jpg");
         sprite.setTexture(texture);
         window.draw(sprite);
         window.display();
@@ -82,17 +81,16 @@ int menu()
     printf("Enter Choice: ");
     std::cin >> choice;
 
-    return choice % 5;
+    return choice%5;
 }
 
 void drawbg()
 {
-    if (!window.isOpen())
-        return;
+    if(!window.isOpen()) return;
     window.clear();
 
     sf::Texture texture;
-    texture.loadFromFile("data/img/bg/" + std::to_string(bg & 7) + ".jpg");
+    texture.loadFromFile("data/img/bg/"+std::to_string(bg&7)+".jpg");
     sf::Sprite sprite;
     sprite.setTexture(texture);
 

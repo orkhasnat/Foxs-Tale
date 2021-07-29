@@ -9,7 +9,7 @@ class Boost : public Item
 
 public:
     Boost(int);
-    void bonus(int *);
+    void bonus(int*);
 };
 
 #endif

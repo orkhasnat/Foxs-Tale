@@ -1,9 +1,9 @@
 #ifndef MISC_H
 #define MISC_H
 
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
-#include <iostream>
+#include <bits/stdc++.h>
+#include "SFML/Graphics.hpp"
+#include "SFML/Audio.hpp"
 
 extern int bg;
 extern sf::RenderWindow window;
@@ -25,7 +25,7 @@ enum ItemType
     nothing,
     coin,
     booster,
-    invincibility,
+    protection,
     slowdown,
     gem
 };

@@ -3,9 +3,10 @@
 
 #include "Platform.hpp"
 
-class BouncyPlatform: public Platform
+class BouncyPlatform : public Platform
 {
-
+public:
+    BouncyPlatform(int);
 };
 
 #endif

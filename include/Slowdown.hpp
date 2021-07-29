@@ -9,7 +9,7 @@ class SlowDown : public Item
 
 public:
     SlowDown(int);
-    void bonus(int *);
+    void bonus(int*);
 };
 
 #endif

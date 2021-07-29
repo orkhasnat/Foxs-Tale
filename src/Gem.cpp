@@ -1,5 +1,10 @@
 #include "Gem.hpp"
 
+Gem::Gem(int _x)
+{
+    setSprite(_x);
+}
+
 void Gem::setSprite(const int x)
 {
     sf::Texture texture;
@@ -10,12 +15,7 @@ void Gem::setSprite(const int x)
     sprite.setPosition(x, 680);
 }
 
-Gem::Gem(int _x)
-{
-    setSprite(_x);
-}
-
 void Gem::bonus(int *_life)
 {
-    *_life = std::min(*_life + 1, 6);
+    *_life=std::min(*_life+1, 6);
 }
