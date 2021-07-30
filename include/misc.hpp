@@ -11,6 +11,7 @@ extern sf::Event event;
 extern sf::Clock clk;
 extern sf::Music music;
 extern sf::Font arial;
+extern sf::Font ArchitectsDaughter;
 
 enum PlatformType
 {

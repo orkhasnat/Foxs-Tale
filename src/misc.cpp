@@ -6,6 +6,7 @@ sf::Event event;
 sf::Clock clk;
 sf::Music music;
 sf::Font arial;
+sf::Font ArchitectsDaughter;
 
 void icon()
 {
@@ -18,16 +19,22 @@ void icon()
 void intro()
 {
     sf::Texture texture;
+    texture.loadFromFile("data/img/intro/foxie.png");
+    sf::IntRect rect(0, 0, 720, 720);
     sf::Sprite sprite;
-    int cover=rand()%18;
+    sprite.setTexture(texture);
+    sprite.setTextureRect(rect);
+    sprite.setPosition(240, 0);
 
     sf::Music sound;
-    sound.openFromFile("data/audio/intro.ogg");
+    sound.openFromFile("data/audio/intro.ogg"); // // Check this, Tariq: The same music for the menu and the intro feels weird. You should pick a different music. Currently I have switched it back to the Rapid Roll intro because your fox kinda looks like the Rapid Roll Mascot. Change it if you want but don't use the same music as the menu.
     sound.setLoop(0);
     sound.setVolume(10);
     sound.play();
 
-    while(sound.getStatus()==sf::Music::Playing)
+    clk.restart();
+
+    while(window.isOpen())
     {
         while(window.pollEvent(event))
         {
@@ -45,43 +52,128 @@ void intro()
             }
         }
 
-        texture.loadFromFile("data/img/intro/"+std::to_string(cover)+".jpg");
-        sprite.setTexture(texture);
+        if(clk.getElapsedTime().asMilliseconds()>50)
+        {
+            rect.left+=720;
+            if(rect.left>14400-720)
+            {
+                rect.left=0;
+                rect.top+=720;
+                rect.top%=2880; // Check this, Tariq: According to this method, the intro will run forever until manually stopped. In my opinion, it should not be the case.
+                //But since you had kept it that way, I didn't change it. To change it, replace the line with this-
+                //if(rect.top>=2880) return;
+            }
+
+            sprite.setTextureRect(rect);
+            clk.restart();
+        }
+
+        window.clear(sf::Color::White);
         window.draw(sprite);
         window.display();
-        window.clear();
     }
-
-    window.display();
 }
 
 int menu()
 {
-    sf::Text text;
-    text.setFont(arial);
-    text.setString("Go to console");
+    int i, choice, active=1;
+    sf::Music sound;
+    sound.openFromFile("data/audio/menu.ogg");
+    sound.setLoop(1); // Check this, Tariq: I think the music of the menu should not stop. That's why I set the loop to true.
+    sound.setVolume(10);
+    sound.play();
 
-    text.setCharacterSize(30);
-    text.setFillColor(sf::Color::White);
-    text.setOutlineThickness(2);
-    text.setOutlineColor(sf::Color::Black);
-    text.setStyle(sf::Text::Bold);
-    text.setPosition(50, 50);
+    sf::RectangleShape rect;
+    rect.setSize(sf::Vector2f(420, 720)); // Check this, Tariq: If the width of the black rectangle rectangle is okay
+    rect.setFillColor(sf::Color(0, 0, 0, 200)); // Check this, Tariq: If the opacity of the black rectangle is okay
+    rect.setPosition(0, 0);
 
-    window.clear();
-    window.draw(text);
-    window.display();
+    sf::Color inactive=sf::Color::Black, selected=sf::Color::Red, border=sf::Color::White; // Check this, Tariq: The colors of the text. Do experiments with it and pick what you think is best.
+    sf::Text text[5];
+    for(i=0; i<5; i++)
+    {
+        text[i].setFont(ArchitectsDaughter);
+        text[i].setCharacterSize(30);
+        text[i].setFillColor(inactive);
+        text[i].setOutlineThickness(2); // Check this, Tariq: If texts should have borders. Do experiments with it and pick what you think is best.
+        text[i].setOutlineColor(border);
+        text[i].setStyle(sf::Text::Bold); // Check this, Tariq: If texts should be Bold. Do experiments with it and pick what you think is best.
+        text[i].setPosition(120, 120*i-15);
+    }
+    text[0].setPosition(120, 600-15);
 
-    int choice;
-    puts("1. New Game");
-    puts("2. High Scores");
-    puts("3. Instructions");
-    puts("4. Credits");
-    puts("5. Exit");
-    printf("Enter Choice: ");
-    std::cin >> choice;
+    text[1].setString("1. New Game");
+    text[2].setString("2. High Scores");
+    text[3].setString("3. Instructions");
+    text[4].setString("4. Credits");
+    text[0].setString("5. Exit");
 
-    return choice%5;
+    while(window.isOpen())
+    {
+        while(window.pollEvent(event))
+        {
+            if(event.type==sf::Event::Closed)
+            {
+                window.close();
+                return 0;
+            }
+
+            if(event.type==sf::Event::TextEntered && event.text.unicode>'0' && event.text.unicode<'6') // Check this, Tariq: Input can now be given via Numpad
+            {
+                choice=event.text.unicode-'0';
+                return choice%5;
+            }
+
+            else if(event.type==sf::Event::KeyPressed) switch(event.key.code)
+            {
+            case sf::Keyboard::Up:
+                text[active].setFillColor(inactive);
+                active+=5;
+                active--;
+                active%=5;
+                break;
+
+            case sf::Keyboard::Down:
+                text[active].setFillColor(inactive);
+                active+=5;
+                active++;
+                active%=5;
+                break;
+
+            case sf::Keyboard::Enter:
+                return active;
+            case sf::Keyboard::Space: // Check this, Tariq: Pressing Space while in the menu will change the background
+                bg++;
+            }
+
+            if(event.type==sf::Event::MouseMoved) // Check this, Tariq: Mouse Controls added to the menu
+            {
+                for(i=0; i<5; i++) if(text[i].getGlobalBounds().contains(XCursor, YCursor))
+                {
+                    text[active].setFillColor(inactive);
+                    active=i;
+                    break;
+                }
+            }
+
+            if(event.type==sf::Event::MouseButtonPressed && event.mouseButton.button==sf::Mouse::Left)
+            {
+                for(i=0; i<5; i++) if(text[i].getGlobalBounds().contains(XButton, YButton))
+                {
+                    text[active].setFillColor(inactive);
+                    active=i;
+                    return active;
+                }
+            }
+        }
+
+        window.clear();
+        drawbg();
+        window.draw(rect);
+        text[active].setFillColor(selected);
+        for(i=0; i<5; i++) window.draw(text[i]);
+        window.display();
+    }
 }
 
 void drawbg()
