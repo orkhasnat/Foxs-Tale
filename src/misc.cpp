@@ -59,9 +59,7 @@ void intro()
             {
                 rect.left=0;
                 rect.top+=720;
-                rect.top%=2880; // Check this, Tariq: According to this method, the intro will run forever until manually stopped. In my opinion, it should not be the case.
-                //But since you had kept it that way, I didn't change it. To change it, replace the line with this-
-                //if(rect.top>=2880) return;
+                if(rect.top>=2880) return;
             }
 
             sprite.setTextureRect(rect);
@@ -79,34 +77,32 @@ int menu()
     int i, choice, active=1;
     sf::Music sound;
     sound.openFromFile("data/audio/menu.ogg");
-    sound.setLoop(1); // Check this, Tariq: I think the music of the menu should not stop. That's why I set the loop to true.
+    sound.setLoop(1);
     sound.setVolume(10);
     sound.play();
 
     sf::RectangleShape rect;
-    rect.setSize(sf::Vector2f(420, 720)); // Check this, Tariq: If the width of the black rectangle rectangle is okay
-    rect.setFillColor(sf::Color(0, 0, 0, 200)); // Check this, Tariq: If the opacity of the black rectangle is okay
+    rect.setSize(sf::Vector2f(420, 720));
+    rect.setFillColor(sf::Color(0, 0, 0, 200));
     rect.setPosition(0, 0);
 
-    sf::Color inactive=sf::Color::Black, selected=sf::Color::Red, border=sf::Color::White; // Check this, Tariq: The colors of the text. Do experiments with it and pick what you think is best.
+    sf::Color inactive=sf::Color::White, selected=sf::Color::Red;
     sf::Text text[5];
     for(i=0; i<5; i++)
     {
         text[i].setFont(ArchitectsDaughter);
         text[i].setCharacterSize(30);
         text[i].setFillColor(inactive);
-        text[i].setOutlineThickness(2); // Check this, Tariq: If texts should have borders. Do experiments with it and pick what you think is best.
-        text[i].setOutlineColor(border);
-        text[i].setStyle(sf::Text::Bold); // Check this, Tariq: If texts should be Bold. Do experiments with it and pick what you think is best.
+        text[i].setStyle(sf::Text::Bold);
         text[i].setPosition(120, 120*i-15);
     }
     text[0].setPosition(120, 600-15);
 
-    text[1].setString("1. New Game");
-    text[2].setString("2. High Scores");
-    text[3].setString("3. Instructions");
-    text[4].setString("4. Credits");
-    text[0].setString("5. Exit");
+    text[1].setString("New Game");
+    text[2].setString("High Scores");
+    text[3].setString("Instructions");
+    text[4].setString("Credits");
+    text[0].setString("Exit");
 
     while(window.isOpen())
     {
@@ -118,7 +114,7 @@ int menu()
                 return 0;
             }
 
-            if(event.type==sf::Event::TextEntered && event.text.unicode>'0' && event.text.unicode<'6') // Check this, Tariq: Input can now be given via Numpad
+            if(event.type==sf::Event::TextEntered && event.text.unicode>'0' && event.text.unicode<'6')
             {
                 choice=event.text.unicode-'0';
                 return choice%5;
@@ -141,8 +137,9 @@ int menu()
                 break;
 
             case sf::Keyboard::Enter:
+            case sf::Keyboard::Right:
                 return active;
-            case sf::Keyboard::Space: // Check this, Tariq: Pressing Space while in the menu will change the background
+            case sf::Keyboard::Space:
                 bg++;
             }
 
