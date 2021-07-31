@@ -232,7 +232,7 @@ void Game::draw()
     drawbg();
     drawremaining();
     drawscore();
-    window.draw(frame);
+    drawframe();
     window.draw(spikes);
     for(int i=0; i<platforms.size(); i++)
     {
@@ -420,12 +420,6 @@ Game::Game(): score(0), life(3), runspeed(1), slowdowntime(0)
     newPlatform();
     levitate(15+rand()%5);
     newball();
-
-    frame.setSize(sf::Vector2f(400, 600));
-    frame.setFillColor(sf::Color(255, 255, 255, 200));
-    frame.setOutlineColor(sf::Color::Black);
-    frame.setOutlineThickness(5);
-    frame.setPosition(800, 100);
 
     texture.loadFromFile("data/img/Spikes_Flip.png");
     spikes.setTexture(texture);

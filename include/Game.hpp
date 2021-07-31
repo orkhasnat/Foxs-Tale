@@ -19,7 +19,6 @@ private:
     int score, life, runspeed, slowdowntime;
     Queue platforms;
     Ball *ball;
-    sf::RectangleShape frame;
     sf::Texture texture;
     sf::Sprite spikes;
     sf::Music playing;

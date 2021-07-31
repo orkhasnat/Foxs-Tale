@@ -185,3 +185,16 @@ void drawbg()
 
     window.draw(sprite);
 }
+
+void drawframe()
+{
+    sf::RectangleShape frame;
+
+    frame.setSize(sf::Vector2f(400, 600));
+    frame.setFillColor(sf::Color(255, 255, 255, 200));
+    frame.setOutlineColor(sf::Color::Black);
+    frame.setOutlineThickness(5);
+    frame.setPosition(800, 100);
+
+    window.draw(frame);
+}

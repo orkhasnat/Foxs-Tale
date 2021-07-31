@@ -40,5 +40,6 @@ void icon();
 void intro();
 int menu();
 void drawbg();
+void drawframe();
 
 #endif
