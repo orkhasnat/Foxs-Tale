@@ -23,7 +23,7 @@ int main()
     readrecords(records, filepointer) // Read from High_Score.txt into records (set)
     close file pointer*/
     std::set<std::pair<int, std::string>> records;
-    std::ifstream fin("High_Score.txt");
+    std::ifstream fin("High_Score");
     readrecords(records, fin);
     fin.close();
 
