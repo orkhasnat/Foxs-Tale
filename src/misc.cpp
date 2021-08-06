@@ -171,6 +171,8 @@ int menu()
         for(i=0; i<5; i++) window.draw(text[i]);
         window.display();
     }
+
+    return 0;
 }
 
 void drawbg()
@@ -197,4 +199,100 @@ void drawframe()
     frame.setPosition(800, 100);
 
     window.draw(frame);
+}
+
+
+void readrecords(std::set<std::pair<int, std::string>> &records, std::ifstream &fin) 
+{
+    // for(int i=0; fin && i<10; i++)
+    // {
+    //     int score;
+    //     std::string name;
+
+    //     fin >> score >> name;
+    //     records.insert({score, name});
+    // }
+
+    int score;
+    std::string name;
+
+     while(fin >> score >> name)
+    {
+        
+        
+        records.insert({score, name});
+    }
+
+    //while(records.size() > 10) records.erase(records.begin());
+    
+}
+
+void displayrecords(const std::set<std::pair<int, std::string>> records) 
+{
+    int i;
+    sf::Text text[2];
+    sf::Text hscore[10][2];
+
+    for(i=0; i<2; i++)
+    {
+        text[i].setFont(arial);
+        text[i].setCharacterSize(30);
+        text[i].setFillColor(sf::Color::White);
+        text[i].setOutlineThickness(2);
+        text[i].setOutlineColor(sf::Color::Black);
+        text[i].setStyle(sf::Text::Bold);
+        text[i].setPosition(810+250*i, 55);
+    }
+    text[0].setString("Name");
+    text[1].setString("Score");
+
+    i=0;
+    for(auto it=records.rbegin(); it!=records.rend(); it++, i++)
+    {
+        hscore[i][0].setFont(arial); hscore[i][1].setFont(arial);
+        hscore[i][0].setCharacterSize(30); hscore[i][1].setCharacterSize(30);
+        hscore[i][0].setFillColor(sf::Color::Yellow); hscore[i][1].setFillColor(sf::Color::Yellow);
+        hscore[i][0].setOutlineThickness(2); hscore[i][1].setOutlineThickness(2);
+        hscore[i][0].setOutlineColor(sf::Color::Black); hscore[i][1].setOutlineColor(sf::Color::Black);
+        hscore[i][0].setStyle(sf::Text::Bold); hscore[i][1].setStyle(sf::Text::Bold);
+        hscore[i][0].setPosition(810, 110+60*i); hscore[i][1].setPosition(1060, 110+60*i);
+
+        hscore[i][0].setString(it->second); hscore[i][1].setString(std::to_string(it->first));
+    }
+
+    while(window.isOpen())
+    {
+        while(window.pollEvent(event))
+        {
+            if(event.type==sf::Event::Closed)
+            {
+                window.close();
+                return;
+            }
+
+            if(event.type==sf::Event::KeyPressed || (event.type==sf::Event::MouseButtonPressed && event.mouseButton.button==sf::Mouse::Left)) return;
+        }
+
+        drawbg();
+        drawframe();
+        window.draw(text[0]);
+        window.draw(text[1]);
+        for(i=0; i<records.size(); i++)
+        {
+            window.draw(hscore[i][0]);
+            window.draw(hscore[i][1]);
+        }
+        window.display();
+    }
+}
+
+
+std::string getPlayerName() 
+{
+    std::string name;
+
+    std::cout << "Enter Your Name: ";
+    std::cin >> name;
+
+    return name;
 }
