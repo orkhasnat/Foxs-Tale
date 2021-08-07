@@ -18,6 +18,14 @@ function cleaning{
     rm .\*.o
     echo "...........done............."
 }
+function cleaningall{
+    echo "........cleaning.........."
+    rm .\*.o
+    rm .\bin\RapidRoll.exe
+    rm High_Score.txt
+    rm .\bin\High_Score.txt
+    echo "...........done............."
+}
 
 function Helpmenu{
         echo "Write -c for compilation, clean for deleting the .o files and cleanall for .o and .exe file"
@@ -33,7 +41,7 @@ function RunAgain{
             "compile" {compilation}
             "-c" {compilation}
             "clean" {cleaning}
-            "cleanall" {cleaning ;rm .\bin\RapidRoll.exe; Break}
+            "cleanall" {cleaningall; Break}
             "execute" {.\bin\RapidRoll.exe; Break}
             "-e" {.\bin\RapidRoll.exe; Break}
             "all" {
@@ -60,7 +68,7 @@ switch ($params){
     "compile" {compilation}
     "-c" {compilation}
     "clean" {cleaning}
-    "cleanall" {cleaning ;rm .\bin\RapidRoll.exe; Break}
+    "cleanall" {cleaningall; Break}
     "execute" {.\bin\RapidRoll.exe; Break}
     "-e" {.\bin\RapidRoll.exe; Break}
     "all" {
