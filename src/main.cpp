@@ -16,10 +16,10 @@ int main()
 
     int choice;
 
-    /*std::set<pair<int,string>> records;
-    open file High_Score.txt in read mode
-    readrecords(records, filepointer) // Read from High_Score.txt into records (set)
-    close file pointer*/
+    std::set<std::pair<int, std::string>> records;
+    std::ifstream fin("data/High_Score.txt");
+    readrecords(records, fin);
+    fin.close();
 
     while(window.isOpen())
     {
@@ -30,22 +30,55 @@ int main()
             Game game;
             game.run();
 
-            std::cout << "Your Score: " << game.getScore() << '\n';
+            int score=game.getScore();
 
-            /*IF highscore.size()<10
-                highscore.insert(game.getScore(), getPlayerName())
-            ELSE IF game.getScore()>*(highscore.begin()).first
-                highscore.erase(highscore.begin())
-                highscore.insert(game.getScore(), getPlayerName())
-            Don't need to do anything with the file*/
+            if(records.size()<10)
+            {
+                drawrecord(score);
+
+                sf::Music music;
+                music.openFromFile("data/audio/playing.ogg"); // A different music is recommended
+                music.setLoop(1);
+                music.setVolume(10);
+                music.play();
+
+                sf::Text text;
+                text.setFont(arial);
+                text.setCharacterSize(30);
+                text.setFillColor(sf::Color::White);
+                text.setOutlineThickness(2);
+                text.setOutlineColor(sf::Color::Black);
+                text.setStyle(sf::Text::Bold);
+
+                records.insert({game.getScore(), scanfromscreen(text, sf::IntRect(810, 110, 200, 40))});
+                music.stop();
+            }
+
+            else if(score > records.begin()->first)
+            {
+                drawrecord(score);
+
+                sf::Music music;
+                music.openFromFile("data/audio/playing.ogg"); // A different music is recommended
+                music.setLoop(1);
+                music.setVolume(10);
+                music.play();
+
+                sf::Text text;
+                text.setFont(arial);
+                text.setCharacterSize(30);
+                text.setFillColor(sf::Color::White);
+                text.setOutlineThickness(2);
+                text.setOutlineColor(sf::Color::Black);
+                text.setStyle(sf::Text::Bold);
+
+                records.erase(records.begin());
+                records.insert({game.getScore(), scanfromscreen(text, sf::IntRect(810, 110, 200, 40))});
+                music.stop();
+            }
         }
 
-        else if(choice==2)
-        {
-            //high scores
-
-            //Display High Scores in the window from records (set) in reversed order
-        }
+        else if(choice==2) displayrecords(records); //high scores
 
         else if(choice==3)
         {
@@ -66,9 +99,8 @@ int main()
         else window.close();
     }
 
-    /*open file High_Score.txt in write mode
-    writerecords(records, filepointer) // Clear High_Score.txt and then Write into High_Score.txt from records (set)
-    close file pointer*/
+    std::ofstream fout("data/High_Score.txt");
+    for(auto it=records.begin(); it!=records.end(); it++) fout << it->first<< ' ' << it->second << '\n';
 
     return 0;
 }

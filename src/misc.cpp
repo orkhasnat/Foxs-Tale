@@ -27,7 +27,7 @@ void intro()
     sprite.setPosition(240, 0);
 
     sf::Music sound;
-    sound.openFromFile("data/audio/intro.ogg"); // // Check this, Tariq: The same music for the menu and the intro feels weird. You should pick a different music. Currently I have switched it back to the Rapid Roll intro because your fox kinda looks like the Rapid Roll Mascot. Change it if you want but don't use the same music as the menu.
+    sound.openFromFile("data/audio/intro.ogg"); // The same music for the menu and the intro feels weird. A different music is recommended. Currently I have temporarily switched it back to the Rapid Roll intro.
     sound.setLoop(0);
     sound.setVolume(10);
     sound.play();
@@ -143,7 +143,7 @@ int menu()
                 bg++;
             }
 
-            if(event.type==sf::Event::MouseMoved) // Check this, Tariq: Mouse Controls added to the menu
+            if(event.type==sf::Event::MouseMoved)
             {
                 for(i=0; i<5; i++) if(text[i].getGlobalBounds().contains(XCursor, YCursor))
                 {
@@ -173,6 +173,65 @@ int menu()
     }
 }
 
+std::string scanfromscreen(sf::Text& text, sf::IntRect rect)
+{
+    if(!window.isOpen()) return "";
+
+    sf::Texture texture;
+    texture.create(window.getSize().x, window.getSize().y);
+    texture.update(window);
+    sf::Sprite screenshot;
+    screenshot.setTexture(texture);
+
+    std::string str="";
+    text.setString(str);
+    text.setPosition(rect.left, rect.top);
+
+    bool flag=1;
+    while(flag && window.isOpen())
+    {
+        while(window.pollEvent(event))
+        {
+            if(event.type==sf::Event::Closed) window.close();
+
+            else if(event.type==sf::Event::TextEntered && ((event.text.unicode>='a' && event.text.unicode<='z') || (event.text.unicode>='A' && event.text.unicode<='Z') || (event.text.unicode>='0' && event.text.unicode<='9') || event.text.unicode==' '))
+            {
+                if(event.text.unicode==' ') continue;
+
+                std::string temp="0";
+                temp[0]=event.text.unicode;
+
+                text.setString(str+temp);
+                if(text.getGlobalBounds().width > rect.width) {temp="\n"+temp; text.setString(str+temp);}
+                if(text.getGlobalBounds().height > rect.height) temp="";
+
+                str=str+temp;
+                text.setString(str);
+            }
+
+            else if((event.type==sf::Event::MouseButtonPressed && event.mouseButton.button==sf::Mouse::Left) || (event.type==sf::Event::KeyPressed && event.key.code==sf::Keyboard::Enter)) flag=0;
+
+            else if(event.type==sf::Event::KeyPressed)
+            {
+                if(event.key.code==sf::Keyboard::Backspace && str.length())
+                {
+                    str=str.substr(0, str.length()-1);
+                    if(str.length()) if(str[str.length()-1]=='\n') str=str.substr(0, str.length()-1);
+                }
+                else if(event.key.code==sf::Keyboard::Escape) str="";
+
+                text.setString(str);
+            }
+        }
+
+        window.draw(screenshot);
+        window.draw(text);
+        window.display();
+    }
+
+    return str;
+}
+
 void drawbg()
 {
     if(!window.isOpen()) return;
@@ -197,4 +256,106 @@ void drawframe()
     frame.setPosition(800, 100);
 
     window.draw(frame);
+}
+
+void readrecords(std::set<std::pair<int, std::string>> &records, std::ifstream &fin)
+{
+//    for(int i=0; fin && i<10; i++)
+//    {
+//        int score;
+//        std::string name;
+//
+//        fin >> score >> name;
+//        records.insert({score, name});
+//    }
+
+    int score;
+    std::string name;
+
+    while(fin >> score >> name) records.insert({score, name});
+    //while(records.size() > 10) records.erase(records.begin());
+}
+
+void displayrecords(const std::set<std::pair<int, std::string>> records)
+{
+    int i;
+    sf::Music sound;
+    sound.openFromFile("data/audio/menu.ogg"); // A different music is recommended
+    sound.setLoop(1);
+    sound.setVolume(10);
+    sound.play();
+
+    sf::Text heading[2];
+    sf::Text score[10][2];
+
+    for(i=0; i<2; i++)
+    {
+        heading[i].setFont(arial);
+        heading[i].setCharacterSize(30);
+        heading[i].setFillColor(sf::Color::White);
+        heading[i].setOutlineThickness(2);
+        heading[i].setOutlineColor(sf::Color::Black);
+        heading[i].setStyle(sf::Text::Bold);
+        heading[i].setPosition(810+250*i, 55);
+    }
+    heading[0].setString("Name");
+    heading[1].setString("Score");
+
+    i=0;
+    for(auto it=records.rbegin(); it!=records.rend(); it++, i++)
+    {
+        score[i][0].setFont(arial); score[i][1].setFont(arial);
+        score[i][0].setCharacterSize(30); score[i][1].setCharacterSize(30);
+        score[i][0].setFillColor(sf::Color::Yellow); score[i][1].setFillColor(sf::Color::Yellow);
+        score[i][0].setOutlineThickness(2); score[i][1].setOutlineThickness(2);
+        score[i][0].setOutlineColor(sf::Color::Black); score[i][1].setOutlineColor(sf::Color::Black);
+        score[i][0].setStyle(sf::Text::Bold); score[i][1].setStyle(sf::Text::Bold);
+        score[i][0].setPosition(810, 110+60*i); score[i][1].setPosition(1060, 110+60*i);
+
+        score[i][0].setString(it->second); score[i][1].setString(std::to_string(it->first));
+    }
+
+    while(window.isOpen())
+    {
+        while(window.pollEvent(event))
+        {
+            if(event.type==sf::Event::Closed)
+            {
+                window.close();
+                return;
+            }
+
+            if(event.type==sf::Event::KeyPressed || (event.type==sf::Event::MouseButtonPressed && event.mouseButton.button==sf::Mouse::Left)) return;
+        }
+
+        drawbg();
+        drawframe();
+        window.draw(heading[0]);
+        window.draw(heading[1]);
+        for(i=0; i<records.size(); i++)
+        {
+            window.draw(score[i][0]);
+            window.draw(score[i][1]);
+        }
+        window.display();
+    }
+}
+
+void drawrecord(int score)
+{
+    drawbg();
+    drawframe();
+
+    sf::Text text;
+    text.setFont(arial);
+    text.setString("New High Score: "+std::to_string(score)+"\nEnter Your Name");
+
+    text.setCharacterSize(30);
+    text.setFillColor(sf::Color::White);
+    text.setOutlineThickness(2);
+    text.setOutlineColor(sf::Color::Black);
+    text.setStyle(sf::Text::Bold);
+    text.setPosition(800, 25);
+
+    window.draw(text);
 }
