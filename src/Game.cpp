@@ -239,7 +239,7 @@ void Game::draw()
         window.draw(platforms[i]->sprite);
         if(platforms[i]->getItem()) window.draw(platforms[i]->getItem()->sprite);
     }
-    if(ball) window.draw(ball->circle);
+    if(ball) window.draw(ball->fox);
 }
 
 void Game::levitate(const int movement)
@@ -266,12 +266,16 @@ void Game::levitate(const int movement)
 
 void Game::leftarrow()
 {
+    if(ball->direction == 1) {
+        ball->fox.setTextureRect(sf::IntRect(108, 0, -108, 108));
+        ball->direction = -1;
+    }
     int ballspeed=8*(1+0.5*!!(ball->isBoosted));
 
     while(ballspeed--)
     {
-        ball->circle.move(-1, 0);
-        if(ball->circle.getPosition().x-ball->circle.getRadius()-ball->circle.getOutlineThickness()<800) ball->circle.move(+1, 0);
+        ball->fox.move(-1, 0);
+        if(ball->fox.getPosition().x-7-1<800) ball->fox.move(+1, 0);
 
         if((ball->findPlatform(platforms))==2) getBonus();
         if((ball->findPlatform(platforms))==3) burst();
@@ -280,12 +284,16 @@ void Game::leftarrow()
 
 void Game::rightarrow()
 {
+    if(ball->direction == -1) {
+        ball->fox.setTextureRect(sf::IntRect(0, 0, 108, 108));
+        ball->direction = 1;
+    }
     int ballspeed=8*(1+0.5*!!(ball->isBoosted));
 
     while(ballspeed--)
     {
-        ball->circle.move(1, 0);
-        if(ball->circle.getPosition().x+ball->circle.getRadius()+ball->circle.getOutlineThickness()>1200) ball->circle.move(-1, 0);
+        ball->fox.move(1, 0);
+        if(ball->fox.getPosition().x+7+1>1200) ball->fox.move(-1, 0);
 
         if((ball->findPlatform(platforms))==2) getBonus();
         if((ball->findPlatform(platforms))==3) burst();
@@ -306,7 +314,7 @@ void Game::fall()
         return;
     }
 
-    ball->circle.move(0, 10);
+    ball->fox.move(0, 10);
     if(land=ball->findPlatform(platforms))
     {
         if(land==2) getBonus();
@@ -317,11 +325,11 @@ void Game::fall()
 
     if(ball)
     {
-        ball->circle.move(0, 10);
+        ball->fox.move(0, 10);
         if(ball->findPlatform(platforms)==2) getBonus();
         else if(ball->findPlatform(platforms)==3) burst();
         else if(ball->findPlatform(platforms)==4) bounce();
-        else if(ball->circle.getPosition().y>=700) burst();
+        else if(ball->fox.getPosition().y>=700) burst();
     }
 }
 
@@ -331,15 +339,15 @@ void Game::bounce()
 
     for(int i=5-rand()%5; i; i--)
     {
-        ball->circle.move(0, -20);
+        ball->fox.move(0, -20);
         if(ball->findPlatform(platforms))
         {
-            ball->circle.move(0, 40);
+            ball->fox.move(0, 40);
             ball->standingOn=nullptr;
             return;
         }
 
-        if(ball->circle.getPosition().y-2*ball->circle.getRadius()-ball->circle.getOutlineThickness()<=110)
+        if(ball->fox.getPosition().y-2*7-1<=110)
         {
             burst();
             return;
@@ -365,16 +373,16 @@ void Game::getBonus()
 
     case booster:
         ball->standingOn->getItem()->bonus(&ball->isBoosted);
-        ball->circle.setFillColor(sf::Color::Yellow);
-        ball->circle.setOutlineColor(sf::Color::Red);
+        // ball->circle.setFillColor(sf::Color::Yellow);
+        // ball->circle.setOutlineColor(sf::Color::Red);
         ball->isBoosted+=ball->isProtected;
         ball->isProtected=0;
         break;
 
     case protection:
         ball->standingOn->getItem()->bonus(&ball->isProtected);
-        ball->circle.setFillColor(sf::Color::White);
-        ball->circle.setOutlineColor(sf::Color::Blue);
+        // ball->circle.setFillColor(sf::Color::White);
+        // ball->circle.setOutlineColor(sf::Color::Blue);
         ball->isProtected+=ball->isBoosted;
         ball->isBoosted=0;
         break;
@@ -462,7 +470,7 @@ void Game::run()
         if(ball)
         {
             if(ball->isFalling()) fall();
-            if(ball) if(ball->standingOn) ball->circle.setPosition(ball->standingOn->sprite.getPosition().x+ball->standingOn->getballx(), ball->standingOn->sprite.getPosition().y);
+            if(ball) if(ball->standingOn) ball->fox.setPosition(ball->standingOn->sprite.getPosition().x+ball->standingOn->getballx(), ball->standingOn->sprite.getPosition().y);
 
             if(!window.isOpen()) continue;
 
@@ -472,8 +480,8 @@ void Game::run()
 
                 if(!ball->isBoosted)
                 {
-                    ball->circle.setFillColor(sf::Color::Red);
-                    ball->circle.setOutlineColor(sf::Color::Black);
+                    // ball->circle.setFillColor(sf::Color::Red);
+                    // ball->circle.setOutlineColor(sf::Color::Black);
                 }
             }
             if(ball) if(ball->isProtected)
@@ -482,8 +490,8 @@ void Game::run()
 
                 if(!ball->isProtected)
                 {
-                    ball->circle.setFillColor(sf::Color::Red);
-                    ball->circle.setOutlineColor(sf::Color::Black);
+                    // ball->circle.setFillColor(sf::Color::Red);
+                    // ball->circle.setOutlineColor(sf::Color::Black);
                 }
             }
         }

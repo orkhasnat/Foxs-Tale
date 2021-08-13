@@ -8,15 +8,15 @@
 
 class Ball
 {
-    int isProtected, isBoosted;
+    int isProtected, isBoosted, direction;
     Platform* standingOn;
     friend class Game;
     friend void Boost::bonus(int *_isBoosted);
     friend void Protection::bonus(int *_isProtected);
 
 public:
-    sf::CircleShape circle;
-
+    sf::Texture texture;
+    sf::Sprite fox;
     Ball(Platform*);
     bool isFalling() const;
     int findPlatform(Queue&);
