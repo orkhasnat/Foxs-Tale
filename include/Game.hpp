@@ -46,6 +46,8 @@ private:
 public:
     Game();
     ~Game();
+    int X = 0, Y = 0;
+
     void addScore(int);
     int getScore() const;
     void run();

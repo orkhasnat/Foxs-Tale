@@ -1,5 +1,4 @@
 #include "Game.hpp"
-
 void Game::newball()
 {
     Queue availablePlatforms;
@@ -134,6 +133,13 @@ void Game::manageevents()
         else if(event.type==sf::Event::KeyPressed) switch(event.key.code)
         {
         case sf::Keyboard::Left:
+            X++;
+            if(X==4) {
+                X = 1, Y++;
+            }
+            if(Y == 4) Y = 0;
+            ball->fox.setTextureRect(sf::IntRect(X*108 + 108, Y*108, -108, 108));
+
             if(button)
             {
                 leftarrow();
@@ -143,9 +149,17 @@ void Game::manageevents()
             break;
 
         case sf::Keyboard::Right:
+            X++;
+            if(X==4) {
+                X = 0, Y++;
+            }
+            if(Y == 4) Y = 0;
+            ball->fox.setTextureRect(sf::IntRect(X*108, Y*108, 108, 108));
+
             if(button)
             {
                 rightarrow();
+
                 if(!window.isOpen()) return;
                 button--;
             }
@@ -266,10 +280,7 @@ void Game::levitate(const int movement)
 
 void Game::leftarrow()
 {
-    if(ball->direction == 1) {
-        ball->fox.setTextureRect(sf::IntRect(108, 0, -108, 108));
-        ball->direction = -1;
-    }
+
     int ballspeed=8*(1+0.5*!!(ball->isBoosted));
 
     while(ballspeed--)
@@ -284,10 +295,7 @@ void Game::leftarrow()
 
 void Game::rightarrow()
 {
-    if(ball->direction == -1) {
-        ball->fox.setTextureRect(sf::IntRect(0, 0, 108, 108));
-        ball->direction = 1;
-    }
+
     int ballspeed=8*(1+0.5*!!(ball->isBoosted));
 
     while(ballspeed--)

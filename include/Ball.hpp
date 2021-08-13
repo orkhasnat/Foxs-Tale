@@ -8,7 +8,7 @@
 
 class Ball
 {
-    int isProtected, isBoosted, direction;
+    int isProtected, isBoosted;
     Platform* standingOn;
     friend class Game;
     friend void Boost::bonus(int *_isBoosted);
