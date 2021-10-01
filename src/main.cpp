@@ -9,7 +9,7 @@ int main()
     arial.loadFromFile("data/font/arial.ttf");
     ArchitectsDaughter.loadFromFile("data/font/ArchitectsDaughter-Regular.ttf");
 
-    window.create(sf::VideoMode(1280, 720), "Rapid Roll Advanced");
+    window.create(sf::VideoMode(1280, 720), "Fox's Tale");
     icon();
     intro();
 

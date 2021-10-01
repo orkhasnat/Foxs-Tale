@@ -11,7 +11,7 @@ sf::Font ArchitectsDaughter;
 void icon()
 {
     sf::Image Icon;
-    Icon.loadFromFile("data/img/RR.png");
+    Icon.loadFromFile("data/img/fox.png");
 
     window.setIcon(Icon.getSize().x, Icon.getSize().y, Icon.getPixelsPtr());
 }
