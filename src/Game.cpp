@@ -3,7 +3,7 @@
 void Game::newball()
 {
     Queue availablePlatforms;
-    for(int i=0; i<platforms.size(); i++) if(platforms[i]->getPlatformType()==regular) availablePlatforms.enqueue(platforms[i]);
+    for(int i=0; i<platforms.size(); i++) if(typeid(*platforms[i])==typeid(Platform)) availablePlatforms.enqueue(platforms[i]);
 
     if(availablePlatforms.isEmpty())
     {
@@ -125,12 +125,6 @@ void Game::manageevents()
             return;
         }
 
-        else if(event.type==sf::Event::Resized)
-        {
-            draw();
-            window.display();
-        }
-
         else if(event.type==sf::Event::KeyPressed) switch(event.key.code)
         {
         case sf::Keyboard::Left:
@@ -171,21 +165,19 @@ void Game::pause()
                 return;
             }
 
-            if(event.type==sf::Event::Resized)
+            else if(event.type==sf::Event::Resized)
             {
                 draw();
                 window.display();
             }
 
-            if(event.type==sf::Event::KeyPressed || (event.type==sf::Event::MouseButtonPressed && event.mouseButton.button==sf::Mouse::Left))
+            else if(event.type==sf::Event::KeyPressed || (event.type==sf::Event::MouseButtonPressed && event.mouseButton.button==sf::Mouse::Left))
             {
                 playing.play();
                 return;
             }
         }
     }
-
-    playing.play();
 }
 
 void Game::levelcheck(int temp)

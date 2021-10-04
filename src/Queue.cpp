@@ -55,7 +55,7 @@ Platform* Queue::back()
 Platform* Queue::operator[](int i)
 {
     if(i<Count) return ara[(i+Front)%Size];
-    return nullptr;
+    return 0;
 }
 
 unsigned Queue::size()

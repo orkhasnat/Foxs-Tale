@@ -94,6 +94,26 @@ int main()
             std::cout << "Backgrounds:\nThe First Tree\nBy David Wehle\n\n";
             std::cout << "Music:\n\"Gravity Falls Main Title Theme\"\nBy Brad Breeck\nFrom Gravity Falls- Created By Alex Hirsh\nA Television Animation By Disney\n\n\"Call of Destiny\"\nBy Josh Kramer\n\n";
             std::cout << "Intro Fox:\nTenor\nhttps://i2.wp.com/media1.tenor.com/images/ab80e83e9f913b87bb33cedf9cac2ef2/tenor.gif\n\n";
+
+            std::vector<std::string> credits;
+            credits.push_back("Gameplay Concept:");
+            credits.push_back("Rapid Roll");
+            credits.push_back("Nokia");
+            credits.push_back("");
+            credits.push_back("Backgrounds:");
+            credits.push_back("The First Tree");
+            credits.push_back("By David Wehle");
+            credits.push_back("");
+            credits.push_back("Music:");
+            credits.push_back("'Gravity Falls Main Title Theme'");
+            credits.push_back("By Brad Breeck");
+            credits.push_back("From Gravity Falls");
+            credits.push_back("Created By Alex Hirsh");
+            credits.push_back("A TV Animation By Disney");
+            credits.push_back("");
+            credits.push_back("'Call of Destiny'");
+            credits.push_back("By Josh Kramer");
+            roll(credits);
         }
 
         else window.close();

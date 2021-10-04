@@ -44,7 +44,7 @@ void intro()
                 return;
             }
 
-            if(event.type==sf::Event::KeyPressed || (event.type==sf::Event::MouseButtonPressed && event.mouseButton.button==sf::Mouse::Left))
+            else if(event.type==sf::Event::KeyPressed || (event.type==sf::Event::MouseButtonPressed && event.mouseButton.button==sf::Mouse::Left))
             {
                 window.clear();
                 window.display();
@@ -114,7 +114,7 @@ int menu()
                 return 0;
             }
 
-            if(event.type==sf::Event::TextEntered && event.text.unicode>'0' && event.text.unicode<'6')
+            else if(event.type==sf::Event::TextEntered && event.text.unicode>'0' && event.text.unicode<'6')
             {
                 choice=event.text.unicode-'0';
                 return choice%5;
@@ -124,14 +124,12 @@ int menu()
             {
             case sf::Keyboard::Up:
                 text[active].setFillColor(inactive);
-                active+=5;
-                active--;
+                active+=4;
                 active%=5;
                 break;
 
             case sf::Keyboard::Down:
                 text[active].setFillColor(inactive);
-                active+=5;
                 active++;
                 active%=5;
                 break;
@@ -143,7 +141,7 @@ int menu()
                 bg++;
             }
 
-            if(event.type==sf::Event::MouseMoved)
+            else if(event.type==sf::Event::MouseMoved)
             {
                 for(i=0; i<5; i++) if(text[i].getGlobalBounds().contains(XCursor, YCursor))
                 {
@@ -153,14 +151,9 @@ int menu()
                 }
             }
 
-            if(event.type==sf::Event::MouseButtonPressed && event.mouseButton.button==sf::Mouse::Left)
+            else if(event.type==sf::Event::MouseButtonPressed && event.mouseButton.button==sf::Mouse::Left)
             {
-                for(i=0; i<5; i++) if(text[i].getGlobalBounds().contains(XButton, YButton))
-                {
-                    text[active].setFillColor(inactive);
-                    active=i;
-                    return active;
-                }
+                for(i=0; i<5; i++) if(text[i].getGlobalBounds().contains(XButton, YButton)) return i;
             }
         }
 
@@ -182,6 +175,7 @@ std::string scanfromscreen(sf::Text& text, sf::IntRect rect)
     texture.update(window);
     sf::Sprite screenshot;
     screenshot.setTexture(texture);
+    screenshot.scale(1280.0/window.getSize().x, 720.0/window.getSize().y);
 
     std::string str="";
     text.setString(str);
@@ -325,7 +319,7 @@ void displayrecords(const std::set<std::pair<int, std::string>> records)
                 return;
             }
 
-            if(event.type==sf::Event::KeyPressed || (event.type==sf::Event::MouseButtonPressed && event.mouseButton.button==sf::Mouse::Left)) return;
+            else if(event.type==sf::Event::KeyPressed || (event.type==sf::Event::MouseButtonPressed && event.mouseButton.button==sf::Mouse::Left)) return;
         }
 
         drawbg();
@@ -358,4 +352,65 @@ void drawrecord(int score)
     text.setPosition(800, 25);
 
     window.draw(text);
+}
+
+void roll(std::vector<std::string>& text)
+{
+    int i=0;
+    sf::Text lines;
+
+    lines.setFont(ArchitectsDaughter);
+    lines.setCharacterSize(25);
+    lines.setFillColor(sf::Color::White);
+    lines.setOutlineThickness(2);
+    lines.setOutlineColor(sf::Color::Black);
+    lines.setStyle(sf::Text::Bold);
+    lines.setPosition(810, 650);
+
+    lines.setString("Something");
+    int h=lines.getGlobalBounds().height;
+    lines.setString(text[i]);
+
+    clk.restart();
+
+    while(window.isOpen())
+    {
+        while(window.pollEvent(event))
+        {
+            if(event.type==sf::Event::Closed)
+            {
+                window.close();
+                return;
+            }
+
+            if(event.type==sf::Event::KeyPressed || (event.type==sf::Event::MouseButtonPressed && event.mouseButton.button==sf::Mouse::Left)) return;
+        }
+
+        if(clk.getElapsedTime().asMilliseconds()>500) // Check the time
+        {
+            i++;
+            lines.move(0, -h);
+            if(i<text.size()) lines.setString(lines.getString()+"\n"+text[i]);
+
+            if(lines.getPosition().y<100)
+            {
+                lines.move(0, h);
+                int j;
+
+                std::string str=lines.getString();
+                for(j=0; j<str.size(); j++) if(str[j]=='\n') break;
+                if(j<str.size()) lines.setString(str.substr(j+1, str.size()));
+                else lines.setString("");
+            }
+
+            clk.restart();
+        }
+
+        if(!lines.getString().getSize()) return;
+
+        drawbg();
+        drawframe();
+        window.draw(lines);
+        window.display();
+    }
 }
