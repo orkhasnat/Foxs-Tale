@@ -113,14 +113,14 @@ int main()
             credits.push_back("");
             credits.push_back("'Call of Destiny'");
             credits.push_back("By Josh Kramer");
-            roll(credits);
+            //roll(credits);
         }
 
         else window.close();
     }
 
     std::ofstream fout("data/High_Score.txt");
-    for(auto it=records.begin(); it!=records.end(); it++) fout << it->first<< ' ' << it->second << '\n';
+    for(auto it=records.begin(); it!=records.end(); it++) fout << it->first<< '#' << it->second << '#';
 
     return 0;
 }

@@ -1,69 +1,73 @@
 #include "Queue.hpp"
 
-Queue::Queue(int s=1): Size(s>0? s: 1), Front(0), Count(0)
+#ifndef QUEUE_T
+#define QUEUE_T
+
+template<typename T> Queue<T>::Queue(int s): Size(s>0? s: 1), Front(0), Count(0)
 {
-    ara=new Platform*[Size];
+    ara=new T[Size];
 }
 
-Queue::Queue(): Size(1), Front(0), Count(0)
+template<typename T> Queue<T>::Queue(): Size(1), Front(0), Count(0)
 {
-    ara=new Platform*[Size];
+    ara=new T[Size];
 }
 
-void Queue::extend()
+template<typename T> void Queue<T>::extend()
 {
     int i;
-    Platform *temp[Count];
+    T temp[Count];
     for(i=0; i<Count; ++i) temp[i]=ara[(i+Front)%Size];
     Front=0;
 
     delete[] ara;
     Size*=2;
-    ara=new Platform*[Size];
+    ara=new T[Size];
     for(i=0; i<Count; ++i) ara[i]=temp[i];
 }
 
-void Queue::enqueue(Platform* platform)
+template<typename T> void Queue<T>::enqueue(T t)
 {
     int Back=Front+Count;
     if(Count==Size) extend();
     Back%=Size;
-    ara[Back]=platform;
+    ara[Back]=t;
     Count++;
 }
 
-void Queue::dequeue()
+template<typename T> void Queue<T>::dequeue()
 {
     if(!Count) return;
 
-    delete ara[Front];
     Front++;
     Front%=Size;
     Count--;
 }
 
-Platform* Queue::front()
+template<typename T> T Queue<T>::front()
 {
     return ara[Front];
 }
 
-Platform* Queue::back()
+template<typename T> T Queue<T>::back()
 {
     return ara[(Front+Count-1)%Size];
 }
 
-Platform* Queue::operator[](int i)
+template<typename T> T Queue<T>::operator[](int i)
 {
     if(i<Count) return ara[(i+Front)%Size];
     return 0;
 }
 
-unsigned Queue::size()
+template<typename T> unsigned Queue<T>::size()
 {
     return Count;
 }
 
-bool Queue::isEmpty()
+template<typename T> bool Queue<T>::isEmpty()
 {
     return !Count;
 }
+
+#endif

@@ -22,7 +22,7 @@ public:
 
     Ball(Platform*);
     bool isFalling() const;
-    int findPlatform(Queue&);
+    int findPlatform(Queue<Platform*>&);
 };
 
 #endif

@@ -1,4 +1,7 @@
 #include "Ball.hpp"
+#include "Spike.hpp"
+#include "MovingSpike.hpp"
+#include "BouncyPlatform.hpp"
 
 Ball::Ball(Platform* platform): standingOn(platform), isProtected(0), isBoosted(0)
 {
@@ -16,7 +19,7 @@ bool Ball::isFalling() const
     return !standingOn;
 }
 
-int Ball::findPlatform(Queue& platforms)
+int Ball::findPlatform(Queue<Platform*>& platforms)
 {
     standingOn=nullptr;
 

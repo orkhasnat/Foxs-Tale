@@ -2,7 +2,7 @@
 
 void Game::newball()
 {
-    Queue availablePlatforms;
+    Queue<Platform*> availablePlatforms;
     for(int i=0; i<platforms.size(); i++) if(typeid(*platforms[i])==typeid(Platform)) availablePlatforms.enqueue(platforms[i]);
 
     if(availablePlatforms.isEmpty())
@@ -247,6 +247,7 @@ void Game::levitate(const int movement)
             if(ball) if(ball->standingOn==platforms[i]) burst();
             if(!window.isOpen()) return;
             if(!life) return;
+            delete platforms.front();
             platforms.dequeue();
             --i;
         }
@@ -425,7 +426,11 @@ Game::Game(): score(0), life(3), runspeed(1), slowdowntime(0)
 
 Game::~Game()
 {
-    while(!platforms.isEmpty()) platforms.dequeue();
+    while(!platforms.isEmpty())
+    {
+        delete platforms.front();
+        platforms.dequeue();
+    }
     if(ball) delete ball;
 }
 

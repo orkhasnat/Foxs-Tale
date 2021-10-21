@@ -17,7 +17,7 @@ class Game
 {
 private:
     int score, life, runspeed, slowdowntime;
-    Queue platforms;
+    Queue<Platform*> platforms;
     Ball *ball;
     sf::Texture texture;
     sf::Sprite spikes;

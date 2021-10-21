@@ -190,8 +190,6 @@ std::string scanfromscreen(sf::Text& text, sf::IntRect rect)
 
             else if(event.type==sf::Event::TextEntered && ((event.text.unicode>='a' && event.text.unicode<='z') || (event.text.unicode>='A' && event.text.unicode<='Z') || (event.text.unicode>='0' && event.text.unicode<='9') || event.text.unicode==' '))
             {
-                if(event.text.unicode==' ') continue;
-
                 std::string temp="0";
                 temp[0]=event.text.unicode;
 
@@ -254,20 +252,21 @@ void drawframe()
 
 void readrecords(std::set<std::pair<int, std::string>> &records, std::ifstream &fin)
 {
-//    for(int i=0; fin && i<10; i++)
-//    {
-//        int score;
-//        std::string name;
-//
-//        fin >> score >> name;
-//        records.insert({score, name});
-//    }
+    for(int i=0; i<10; i++)
+    {
+        if(!fin) return;
 
-    int score;
-    std::string name;
+        int score;
+        std::string name;
+        char temp;
 
-    while(fin >> score >> name) records.insert({score, name});
-    //while(records.size() > 10) records.erase(records.begin());
+        fin >> score;
+        fin >> temp;
+        if(!fin) return;
+
+        std::getline(fin, name, '#');
+        records.insert({score, name});
+    }
 }
 
 void displayrecords(const std::set<std::pair<int, std::string>> records)
@@ -354,7 +353,7 @@ void drawrecord(int score)
     window.draw(text);
 }
 
-void roll(std::vector<std::string>& text)
+/*void roll(std::vector<std::string>& text)
 {
     int i=0;
     sf::Text lines;
@@ -413,4 +412,4 @@ void roll(std::vector<std::string>& text)
         window.draw(lines);
         window.display();
     }
-}
+}*/
