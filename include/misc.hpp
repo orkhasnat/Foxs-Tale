@@ -18,7 +18,6 @@ enum PlatformType
     regular,
     spike,
     moving,
-    movingspike,
     bouncing
 };
 enum ItemType
@@ -44,7 +43,7 @@ void drawframe();
 std::string scanfromscreen(sf::Text& text, sf::IntRect rect);
 
 void readrecords(std::set<std::pair<int, std::string>> &records, std::ifstream &fin);
-void displayrecords(const std::set<std::pair<int, std::string>> records);
+void displayrecords(const std::set<std::pair<int, std::string>> &records);
 void drawrecord(int score);
 
 void roll(std::vector<std::string>& text);

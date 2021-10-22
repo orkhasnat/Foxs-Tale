@@ -1,7 +1,26 @@
-#include "Queue.hpp"
+template<typename T> class Queue
+{
+protected:
+    int Size, Front, Count;
+    T *ara;
 
-#ifndef QUEUE_T
-#define QUEUE_T
+    void extend();
+
+public:
+    Queue();
+    Queue(int);
+
+    void enqueue(T t);
+    void dequeue();
+    T front();
+    T back();
+    T operator[](int);
+    unsigned size();
+    bool isEmpty();
+
+    class Empty_Queue{};
+    class Out_of_Bounds{};
+};
 
 template<typename T> Queue<T>::Queue(int s): Size(s>0? s: 1), Front(0), Count(0)
 {
@@ -37,7 +56,7 @@ template<typename T> void Queue<T>::enqueue(T t)
 
 template<typename T> void Queue<T>::dequeue()
 {
-    if(!Count) return;
+    if(!Count) throw Empty_Queue();
 
     Front++;
     Front%=Size;
@@ -46,18 +65,20 @@ template<typename T> void Queue<T>::dequeue()
 
 template<typename T> T Queue<T>::front()
 {
+    if(!Count) throw Empty_Queue();
     return ara[Front];
 }
 
 template<typename T> T Queue<T>::back()
 {
+    if(!Count) throw Empty_Queue();
     return ara[(Front+Count-1)%Size];
 }
 
 template<typename T> T Queue<T>::operator[](int i)
 {
-    if(i<Count) return ara[(i+Front)%Size];
-    return 0;
+    if(i>=0 && i<Count) return ara[(i+Front)%Size];
+    throw Out_of_Bounds();
 }
 
 template<typename T> unsigned Queue<T>::size()
@@ -69,5 +90,3 @@ template<typename T> bool Queue<T>::isEmpty()
 {
     return !Count;
 }
-
-#endif

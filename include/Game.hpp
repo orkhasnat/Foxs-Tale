@@ -7,7 +7,6 @@
 #include "Ball.hpp"
 #include "Platform.hpp"
 #include "Spike.hpp"
-#include "MovingSpike.hpp"
 #include "MovingPlatform.hpp"
 #include "BouncyPlatform.hpp"
 
@@ -49,6 +48,8 @@ public:
     void addScore(int);
     int getScore() const;
     void run();
+
+    class Not_Enough_Platforms{};
 };
 
 #endif

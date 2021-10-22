@@ -1,7 +1,4 @@
 #include "Ball.hpp"
-#include "Spike.hpp"
-#include "MovingSpike.hpp"
-#include "BouncyPlatform.hpp"
 
 Ball::Ball(Platform* platform): standingOn(platform), isProtected(0), isBoosted(0)
 {
@@ -29,7 +26,7 @@ int Ball::findPlatform(Queue<Platform*>& platforms)
             if(circle.getPosition().x+circle.getRadius() > platforms[i]->sprite.getPosition().x)
                 if(circle.getPosition().x-circle.getRadius() < platforms[i]->sprite.getPosition().x+platforms[i]->getWidth())
                 {
-                    if(typeid(*platforms[i])==typeid(Spike) || typeid(*platforms[i])==typeid(MovingSpike)) return 3*(!isProtected);
+                    if(typeid(*platforms[i])==typeid(Spike)) return 3*(!isProtected);
                     if(typeid(*platforms[i])==typeid(BouncyPlatform)) return 4;
                     standingOn=platforms[i];
                     platforms[i]->setballx(circle.getPosition().x);

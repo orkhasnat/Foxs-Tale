@@ -5,18 +5,7 @@ void Game::newball()
     Queue<Platform*> availablePlatforms;
     for(int i=0; i<platforms.size(); i++) if(typeid(*platforms[i])==typeid(Platform)) availablePlatforms.enqueue(platforms[i]);
 
-    if(availablePlatforms.isEmpty())
-    {
-        levitate(1);
-        newball();
-    }
-
-    else if(availablePlatforms.size()<2)
-    {
-        ball=new Ball(availablePlatforms[0]);
-        return;
-    }
-
+    if(availablePlatforms.size()<3) throw Not_Enough_Platforms();
     ball=new Ball(availablePlatforms[2+rand()%(availablePlatforms.size()-2)]);
 }
 
@@ -68,10 +57,6 @@ void Game::newPlatform(PlatformType platformtype = regular)
 
     case moving:
         platforms.enqueue(new MovingPlatform(800+temp, itemtype));
-        break;
-
-    case movingspike:
-        //platforms.enqueue(new MovingSpike(800+temp));
         break;
 
     case bouncing:
@@ -406,13 +391,23 @@ void Game::burst()
     pause();
 }
 
-// public functions
-
 Game::Game(): score(0), life(3), runspeed(1), slowdowntime(0)
 {
     newPlatform();
     levitate(15+rand()%5);
-    newball();
+
+    while(1)
+    {
+        try
+        {
+            newball();
+            break;
+        }
+        catch(Not_Enough_Platforms e)
+        {
+            levitate(5);
+        }
+    }
 
     texture.loadFromFile("data/img/Spikes_Flip.png");
     spikes.setTexture(texture);

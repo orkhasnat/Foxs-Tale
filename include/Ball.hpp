@@ -3,7 +3,6 @@
 
 #include "Platform.hpp"
 #include "Spike.hpp"
-#include "MovingSpike.hpp"
 #include "BouncyPlatform.hpp"
 #include "Queue.hpp"
 #include "SFML/Graphics.hpp"

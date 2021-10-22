@@ -269,7 +269,7 @@ void readrecords(std::set<std::pair<int, std::string>> &records, std::ifstream &
     }
 }
 
-void displayrecords(const std::set<std::pair<int, std::string>> records)
+void displayrecords(const std::set<std::pair<int, std::string>> &records)
 {
     int i;
     sf::Music sound;
@@ -356,6 +356,11 @@ void drawrecord(int score)
 /*void roll(std::vector<std::string>& text)
 {
     int i=0;
+    sf::Music sound;
+    sound.openFromFile("data/audio/menu.ogg"); // A different music is recommended
+    sound.setLoop(1);
+    sound.setVolume(10);
+    sound.play();
     sf::Text lines;
 
     lines.setFont(ArchitectsDaughter);

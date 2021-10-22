@@ -59,7 +59,7 @@ int main()
                 drawrecord(score);
 
                 sf::Music music;
-                music.openFromFile("data/audio/playing.ogg"); // A different music is recommended
+                music.openFromFile("data/audio/playing.ogg"); // A different music is recommended, but same as the one used a few lines above
                 music.setLoop(1);
                 music.setVolume(10);
                 music.play();
