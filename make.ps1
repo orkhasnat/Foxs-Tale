@@ -5,10 +5,10 @@ function compilation{
     g++ -c .\src\*.cpp -I.\include
     echo "..........moving............"
     #Move-Item -Path *.o -Destination .\obj -force
-    echo ".........linking............"    
+    echo ".........linking............"
     #g++ -o Play .\obj\*.o main.o -L.\lib -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
-    g++ -o Play .\*.o -L.\lib -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system -mwindows
-    mv .\Play.exe .\bin -force
+    g++ -o RapidRoll .\*.o -L.\lib -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system -mwindows
+    mv .\RapidRoll.exe .\bin -force
     echo "...........done............."
 }
 
@@ -16,6 +16,14 @@ function cleaning{
     echo "........cleaning.........."
     #rm .\obj\*.o
     rm .\*.o
+    echo "...........done............."
+}
+function cleaningall{
+    echo "........cleaning.........."
+    rm .\*.o
+    rm .\bin\RapidRoll.exe
+    rm High_Score.txt
+    rm .\bin\High_Score.txt
     echo "...........done............."
 }
 
@@ -33,19 +41,19 @@ function RunAgain{
             "compile" {compilation}
             "-c" {compilation}
             "clean" {cleaning}
-            "cleanall" {cleaning ;rm .\bin\Play.exe; Break}
-            "execute" {.\bin\Play.exe; Break}
-            "-e" {.\bin\Play.exe; Break}
+            "cleanall" {cleaningall; Break}
+            "execute" {.\bin\RapidRoll.exe; Break}
+            "-e" {.\bin\RapidRoll.exe; Break}
             "all" {
                     compilation;
                     cleaning;
-                    .\bin\Play.exe;
+                    .\bin\RapidRoll.exe;
                     Break
                     }
             "-a" {
                     compilation;
                     cleaning;
-                    .\bin\Play.exe;
+                    .\bin\RapidRoll.exe;
                     Break
                 }
         }
@@ -60,19 +68,19 @@ switch ($params){
     "compile" {compilation}
     "-c" {compilation}
     "clean" {cleaning}
-    "cleanall" {cleaning ;rm .\bin\Play.exe; Break}
-    "execute" {.\bin\Play.exe; Break}
-    "-e" {.\bin\Play.exe; Break}
+    "cleanall" {cleaningall; Break}
+    "execute" {.\bin\RapidRoll.exe; Break}
+    "-e" {.\bin\RapidRoll.exe; Break}
     "all" {
         compilation;
         cleaning;
-        .\bin\Play.exe;
+        .\bin\RapidRoll.exe;
         Break
     }
     "-a" {
         compilation;
         cleaning;
-        .\bin\Play.exe;
+        .\bin\RapidRoll.exe;
         Break
     }
 }

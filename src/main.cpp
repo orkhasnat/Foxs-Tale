@@ -1,4 +1,3 @@
-#include <bits/stdc++.h>
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
 #include "Game.hpp"
@@ -18,18 +17,19 @@ int main()
 
     std::set<std::pair<int, std::string>> records;
     std::ifstream fin("data/High_Score.txt");
+
     readrecords(records, fin);
     fin.close();
 
-    while(window.isOpen())
+    while (window.isOpen())
     {
-        choice=menu();
+        choice = menu();
 
-        if(choice==1)
+        if (choice == 1)
         {
             Game game;
             game.run();
-
+          
             int score=game.getScore();
 
             if(records.size()<10)
@@ -79,8 +79,7 @@ int main()
         }
 
         else if(choice==2) displayrecords(records); //high scores
-
-        else if(choice==3)
+        else if (choice == 3)
         {
             //instructions
             std::vector<std::string> ins;
@@ -91,10 +90,9 @@ int main()
             roll(ins);
         }
 
-        else if(choice==4)
+        else if (choice == 4)
         {
             //credits
-
             // std::cout << '\n';
             // std::cout << "Gameplay Concept:\nRapid Roll\nNokia\n\n";
             // std::cout << "Backgrounds:\nThe First Tree\nBy David Wehle\n\n";
@@ -122,12 +120,11 @@ int main()
             credits.push_back("By Josh Kramer");
             roll(credits);
         }
-
-        else window.close();
+        else
+            window.close();
     }
 
     std::ofstream fout("data/High_Score.txt");
     for(auto it=records.begin(); it!=records.end(); it++) fout << it->first<< '#' << it->second << '#';
-
     return 0;
 }

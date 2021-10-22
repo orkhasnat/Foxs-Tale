@@ -1,6 +1,6 @@
 #include "misc.hpp"
 
-int bg=0;
+int bg = 0;
 sf::RenderWindow window;
 sf::Event event;
 sf::Clock clk;
@@ -34,16 +34,15 @@ void intro()
 
     clk.restart();
 
-    while(window.isOpen())
+    while (window.isOpen())
     {
-        while(window.pollEvent(event))
+        while (window.pollEvent(event))
         {
-            if(event.type==sf::Event::Closed)
+            if (event.type == sf::Event::Closed)
             {
                 window.close();
                 return;
             }
-
             else if(event.type==sf::Event::KeyPressed || (event.type==sf::Event::MouseButtonPressed && event.mouseButton.button==sf::Mouse::Left))
             {
                 window.clear();
@@ -52,14 +51,15 @@ void intro()
             }
         }
 
-        if(clk.getElapsedTime().asMilliseconds()>50)
+        if (clk.getElapsedTime().asMilliseconds() > 50)
         {
-            rect.left+=720;
-            if(rect.left>14400-720)
+            rect.left += 720;
+            if (rect.left > 14400 - 720)
             {
-                rect.left=0;
-                rect.top+=720;
-                if(rect.top>=2880) return;
+                rect.left = 0;
+                rect.top += 720;
+                if (rect.top >= 2880)
+                    return;
             }
 
             sprite.setTextureRect(rect);
@@ -74,7 +74,7 @@ void intro()
 
 int menu()
 {
-    int i, choice, active=1;
+    int i, choice, active = 1;
     sf::Music sound;
     sound.openFromFile("data/audio/menu.ogg");
     sound.setLoop(1);
@@ -86,17 +86,17 @@ int menu()
     rect.setFillColor(sf::Color(0, 0, 0, 200));
     rect.setPosition(0, 0);
 
-    sf::Color inactive=sf::Color::White, selected=sf::Color::Red;
+    sf::Color inactive = sf::Color::White, selected = sf::Color::Red;
     sf::Text text[5];
-    for(i=0; i<5; i++)
+    for (i = 0; i < 5; i++)
     {
         text[i].setFont(ArchitectsDaughter);
         text[i].setCharacterSize(30);
         text[i].setFillColor(inactive);
         text[i].setStyle(sf::Text::Bold);
-        text[i].setPosition(120, 120*i-15);
+        text[i].setPosition(120, 120 * i - 15);
     }
-    text[0].setPosition(120, 600-15);
+    text[0].setPosition(120, 600 - 15);
 
     text[1].setString("New Game");
     text[2].setString("High Scores");
@@ -104,23 +104,23 @@ int menu()
     text[4].setString("Credits");
     text[0].setString("Exit");
 
-    while(window.isOpen())
+    while (window.isOpen())
     {
-        while(window.pollEvent(event))
+        while (window.pollEvent(event))
         {
-            if(event.type==sf::Event::Closed)
+            if (event.type == sf::Event::Closed)
             {
                 window.close();
                 return 0;
             }
-
             else if(event.type==sf::Event::TextEntered && event.text.unicode>'0' && event.text.unicode<'6')
             {
-                choice=event.text.unicode-'0';
-                return choice%5;
+                choice = event.text.unicode - '0';
+                return choice % 5;
             }
 
-            else if(event.type==sf::Event::KeyPressed) switch(event.key.code)
+            else if(event.type==sf::Event::KeyPressed) 
+              switch(event.key.code)
             {
             case sf::Keyboard::Up:
                 text[active].setFillColor(inactive);
@@ -145,12 +145,12 @@ int menu()
             {
                 for(i=0; i<5; i++) if(text[i].getGlobalBounds().contains(XCursor, YCursor))
                 {
+                case sf::Keyboard::Up:
                     text[active].setFillColor(inactive);
-                    active=i;
+                    active += 5;
+                    active--;
+                    active %= 5;
                     break;
-                }
-            }
-
             else if(event.type==sf::Event::MouseButtonPressed && event.mouseButton.button==sf::Mouse::Left)
             {
                 for(i=0; i<5; i++) if(text[i].getGlobalBounds().contains(XButton, YButton)) return i;
@@ -161,7 +161,8 @@ int menu()
         drawbg();
         window.draw(rect);
         text[active].setFillColor(selected);
-        for(i=0; i<5; i++) window.draw(text[i]);
+        for (i = 0; i < 5; i++)
+            window.draw(text[i]);
         window.display();
     }
     return -1;
@@ -224,14 +225,84 @@ std::string scanfromscreen(sf::Text& text, sf::IntRect rect)
 
     return str;
 }
+std::string scanfromscreen(sf::Text &text, sf::IntRect rect)
+{
+    if (!window.isOpen())
+        return "";
 
+    sf::Texture texture;
+    texture.create(window.getSize().x, window.getSize().y);
+    texture.update(window);
+    sf::Sprite screenshot;
+    screenshot.setTexture(texture);
+
+    std::string str = "";
+    text.setString(str);
+    text.setPosition(rect.left, rect.top);
+
+    bool flag = 1;
+    while (flag && window.isOpen())
+    {
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+
+            else if (event.type == sf::Event::TextEntered && ((event.text.unicode >= 'a' && event.text.unicode <= 'z') || (event.text.unicode >= 'A' && event.text.unicode <= 'Z') || (event.text.unicode >= '0' && event.text.unicode <= '9') || event.text.unicode == ' '))
+            {
+                if (event.text.unicode == ' ')
+                    continue;
+
+                std::string temp = "0";
+                temp[0] = event.text.unicode;
+
+                text.setString(str + temp);
+                if (text.getGlobalBounds().width > rect.width)
+                {
+                    temp = "\n" + temp;
+                    text.setString(str + temp);
+                }
+                if (text.getGlobalBounds().height > rect.height)
+                    temp = "";
+
+                str = str + temp;
+                text.setString(str);
+            }
+
+            else if ((event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter))
+                flag = 0;
+
+            else if (event.type == sf::Event::KeyPressed)
+            {
+                if (event.key.code == sf::Keyboard::Backspace && str.length())
+                {
+                    str = str.substr(0, str.length() - 1);
+                    if (str.length())
+                        if (str[str.length() - 1] == '\n')
+                            str = str.substr(0, str.length() - 1);
+                }
+                else if (event.key.code == sf::Keyboard::Escape)
+                    str = "";
+
+                text.setString(str);
+            }
+        }
+
+        window.draw(screenshot);
+        window.draw(text);
+        window.display();
+    }
+
+    return str;
+}
 void drawbg()
 {
-    if(!window.isOpen()) return;
+    if (!window.isOpen())
+        return;
     window.clear();
 
     sf::Texture texture;
-    texture.loadFromFile("data/img/bg/"+std::to_string(bg&7)+".jpg");
+    texture.loadFromFile("data/img/bg/" + std::to_string(bg & 7) + ".jpg");
     sf::Sprite sprite;
     sprite.setTexture(texture);
 
@@ -283,6 +354,7 @@ void displayrecords(const std::set<std::pair<int, std::string>> &records)
     sf::Text score[10][2];
 
     for(i=0; i<2; i++)
+
     {
         heading[i].setFont(arial);
         heading[i].setCharacterSize(30);
@@ -290,10 +362,12 @@ void displayrecords(const std::set<std::pair<int, std::string>> &records)
         heading[i].setOutlineThickness(2);
         heading[i].setOutlineColor(sf::Color::Black);
         heading[i].setStyle(sf::Text::Bold);
+
         heading[i].setPosition(810+250*i, 55);
     }
     heading[0].setString("Name");
     heading[1].setString("Score");
+
 
     i=0;
     for(auto it=records.rbegin(); it!=records.rend(); it++, i++)
@@ -314,18 +388,21 @@ void displayrecords(const std::set<std::pair<int, std::string>> &records)
         while(window.pollEvent(event))
         {
             if(event.type==sf::Event::Closed)
+
             {
                 window.close();
                 return;
             }
 
             else if(event.type==sf::Event::KeyPressed || (event.type==sf::Event::MouseButtonPressed && event.mouseButton.button==sf::Mouse::Left)) return;
+
         }
 
         drawbg();
         drawframe();
         window.draw(heading[0]);
         window.draw(heading[1]);
+
         for(i=0; i<records.size(); i++)
         {
             window.draw(score[i][0]);
@@ -343,6 +420,7 @@ void drawrecord(int score)
     sf::Text text;
     text.setFont(arial);
     text.setString("New High Score: "+std::to_string(score)+"\nEnter Your Name");
+
 
     text.setCharacterSize(30);
     text.setFillColor(sf::Color::White);
@@ -419,3 +497,4 @@ void roll(std::vector<std::string>& text)
         window.display();
     }
 }
+
