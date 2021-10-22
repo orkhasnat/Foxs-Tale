@@ -164,6 +164,7 @@ int menu()
         for(i=0; i<5; i++) window.draw(text[i]);
         window.display();
     }
+    return -1;
 }
 
 std::string scanfromscreen(sf::Text& text, sf::IntRect rect)
@@ -353,7 +354,7 @@ void drawrecord(int score)
     window.draw(text);
 }
 
-/*void roll(std::vector<std::string>& text)
+void roll(std::vector<std::string>& text)
 {
     int i=0;
     sf::Music sound;
@@ -417,4 +418,4 @@ void drawrecord(int score)
         window.draw(lines);
         window.display();
     }
-}*/
+}

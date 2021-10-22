@@ -83,19 +83,26 @@ int main()
         else if(choice==3)
         {
             //instructions
+            std::vector<std::string> ins;
+            ins.reserve(5);
+            ins.push_back("Press <- to go Left");
+            ins.push_back("Press -> to go Right");
+            ins.push_back("Press Space to Pause");
+            roll(ins);
         }
 
         else if(choice==4)
         {
             //credits
 
-            std::cout << '\n';
-            std::cout << "Gameplay Concept:\nRapid Roll\nNokia\n\n";
-            std::cout << "Backgrounds:\nThe First Tree\nBy David Wehle\n\n";
-            std::cout << "Music:\n\"Gravity Falls Main Title Theme\"\nBy Brad Breeck\nFrom Gravity Falls- Created By Alex Hirsh\nA Television Animation By Disney\n\n\"Call of Destiny\"\nBy Josh Kramer\n\n";
-            std::cout << "Intro Fox:\nTenor\nhttps://i2.wp.com/media1.tenor.com/images/ab80e83e9f913b87bb33cedf9cac2ef2/tenor.gif\n\n";
+            // std::cout << '\n';
+            // std::cout << "Gameplay Concept:\nRapid Roll\nNokia\n\n";
+            // std::cout << "Backgrounds:\nThe First Tree\nBy David Wehle\n\n";
+            // std::cout << "Music:\n\"Gravity Falls Main Title Theme\"\nBy Brad Breeck\nFrom Gravity Falls- Created By Alex Hirsh\nA Television Animation By Disney\n\n\"Call of Destiny\"\nBy Josh Kramer\n\n";
+            // std::cout << "Intro Fox:\nTenor\nhttps://i2.wp.com/media1.tenor.com/images/ab80e83e9f913b87bb33cedf9cac2ef2/tenor.gif\n\n";
 
             std::vector<std::string> credits;
+            credits.reserve(20);
             credits.push_back("Gameplay Concept:");
             credits.push_back("Rapid Roll");
             credits.push_back("Nokia");
@@ -113,7 +120,7 @@ int main()
             credits.push_back("");
             credits.push_back("'Call of Destiny'");
             credits.push_back("By Josh Kramer");
-            //roll(credits);
+            roll(credits);
         }
 
         else window.close();
