@@ -1,69 +1,92 @@
-#include "Queue.hpp"
-
-Queue::Queue(int s=1): Size(s>0? s: 1), Front(0), Count(0)
+template<typename T> class Queue
 {
-    ara=new Platform*[Size];
+protected:
+    int Size, Front, Count;
+    T *ara;
+
+    void extend();
+
+public:
+    Queue();
+    Queue(int);
+
+    void enqueue(T t);
+    void dequeue();
+    T front();
+    T back();
+    T operator[](int);
+    unsigned size();
+    bool isEmpty();
+
+    class Empty_Queue{};
+    class Out_of_Bounds{};
+};
+
+template<typename T> Queue<T>::Queue(int s): Size(s>0? s: 1), Front(0), Count(0)
+{
+    ara=new T[Size];
 }
 
-Queue::Queue(): Size(1), Front(0), Count(0)
+template<typename T> Queue<T>::Queue(): Size(1), Front(0), Count(0)
 {
-    ara=new Platform*[Size];
+    ara=new T[Size];
 }
 
-void Queue::extend()
+template<typename T> void Queue<T>::extend()
 {
     int i;
-    Platform *temp[Count];
+    T temp[Count];
     for(i=0; i<Count; ++i) temp[i]=ara[(i+Front)%Size];
     Front=0;
 
     delete[] ara;
     Size*=2;
-    ara=new Platform*[Size];
+    ara=new T[Size];
     for(i=0; i<Count; ++i) ara[i]=temp[i];
 }
 
-void Queue::enqueue(Platform* platform)
+template<typename T> void Queue<T>::enqueue(T t)
 {
     int Back=Front+Count;
     if(Count==Size) extend();
     Back%=Size;
-    ara[Back]=platform;
+    ara[Back]=t;
     Count++;
 }
 
-void Queue::dequeue()
+template<typename T> void Queue<T>::dequeue()
 {
-    if(!Count) return;
+    if(!Count) throw Empty_Queue();
 
-    delete ara[Front];
     Front++;
     Front%=Size;
     Count--;
 }
 
-Platform* Queue::front()
+template<typename T> T Queue<T>::front()
 {
+    if(!Count) throw Empty_Queue();
     return ara[Front];
 }
 
-Platform* Queue::back()
+template<typename T> T Queue<T>::back()
 {
+    if(!Count) throw Empty_Queue();
     return ara[(Front+Count-1)%Size];
 }
 
-Platform* Queue::operator[](int i)
+template<typename T> T Queue<T>::operator[](int i)
 {
-    if(i<Count) return ara[(i+Front)%Size];
-    return nullptr;
+    if(i>=0 && i<Count) return ara[(i+Front)%Size];
+    throw Out_of_Bounds();
 }
 
-unsigned Queue::size()
+template<typename T> unsigned Queue<T>::size()
 {
     return Count;
 }
 
-bool Queue::isEmpty()
+template<typename T> bool Queue<T>::isEmpty()
 {
     return !Count;
 }

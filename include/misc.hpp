@@ -21,7 +21,6 @@ enum PlatformType
     regular,
     spike,
     moving,
-    movingspike,
     bouncing
 };
 enum ItemType
@@ -34,10 +33,10 @@ enum ItemType
     gem
 };
 
-#define XButton event.mouseButton.x * 1280 / window.getSize().x
-#define YButton event.mouseButton.y * 720 / window.getSize().y
-#define XCursor event.mouseMove.x * 1280 / window.getSize().x
-#define YCursor event.mouseMove.y * 720 / window.getSize().y
+#define XButton event.mouseButton.x*1280/window.getSize().x
+#define YButton event.mouseButton.y*720/window.getSize().y
+#define XCursor event.mouseMove.x*1280/window.getSize().x
+#define YCursor event.mouseMove.y*720/window.getSize().y
 
 void readrecords(std::set<std::pair<int, std::string>> &records, std::ifstream &fin); 
 void displayrecords(const std::set<std::pair<int, std::string>> records); 
@@ -48,6 +47,13 @@ void intro();
 int menu();
 void drawbg();
 void drawframe();
+std::string scanfromscreen(sf::Text& text, sf::IntRect rect);
+
+void readrecords(std::set<std::pair<int, std::string>> &records, std::ifstream &fin);
+void displayrecords(const std::set<std::pair<int, std::string>> &records);
+void drawrecord(int score);
+
+void roll(std::vector<std::string>& text);
 
 std::string scanfromscreen(sf::Text& text, sf::IntRect rect);
 void readrecords(std::set<std::pair<int, std::string>> &records, std::ifstream &fin);

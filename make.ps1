@@ -5,9 +5,9 @@ function compilation{
     g++ -c .\src\*.cpp -I.\include
     echo "..........moving............"
     #Move-Item -Path *.o -Destination .\obj -force
-    echo ".........linking............"    
-    #g++ -o RapidRoll .\obj\*.o main.o -L.\lib -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
-    g++ -o RapidRoll .\*.o -L.\lib -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system #-mwindows
+    echo ".........linking............"
+    #g++ -o Play .\obj\*.o main.o -L.\lib -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
+    g++ -o RapidRoll .\*.o -L.\lib -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system -mwindows
     mv .\RapidRoll.exe .\bin -force
     echo "...........done............."
 }

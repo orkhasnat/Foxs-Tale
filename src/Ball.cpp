@@ -16,7 +16,7 @@ bool Ball::isFalling() const
     return !standingOn;
 }
 
-int Ball::findPlatform(Queue& platforms)
+int Ball::findPlatform(Queue<Platform*>& platforms)
 {
     standingOn=nullptr;
 
@@ -26,8 +26,8 @@ int Ball::findPlatform(Queue& platforms)
             if(circle.getPosition().x+circle.getRadius() > platforms[i]->sprite.getPosition().x)
                 if(circle.getPosition().x-circle.getRadius() < platforms[i]->sprite.getPosition().x+platforms[i]->getWidth())
                 {
-                    if(platforms[i]->getPlatformType()==spike || platforms[i]->getPlatformType()==movingspike) return 3*(!isProtected);
-                    if(platforms[i]->getPlatformType()==bouncing) return 4;
+                    if(typeid(*platforms[i])==typeid(Spike)) return 3*(!isProtected);
+                    if(typeid(*platforms[i])==typeid(BouncyPlatform)) return 4;
                     standingOn=platforms[i];
                     platforms[i]->setballx(circle.getPosition().x);
                     if(platforms[i]->checkpickup()) return 2;

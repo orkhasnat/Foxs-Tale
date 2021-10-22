@@ -7,7 +7,6 @@
 #include "Ball.hpp"
 #include "Platform.hpp"
 #include "Spike.hpp"
-#include "MovingSpike.hpp"
 #include "MovingPlatform.hpp"
 #include "BouncyPlatform.hpp"
 
@@ -17,7 +16,7 @@ class Game
 {
 private:
     int score, life, runspeed, slowdowntime;
-    Queue platforms;
+    Queue<Platform*> platforms;
     Ball *ball;
     sf::Texture texture;
     sf::Sprite spikes;
@@ -49,6 +48,8 @@ public:
     void addScore(int);
     int getScore() const;
     void run();
+
+    class Not_Enough_Platforms{};
 };
 
 #endif

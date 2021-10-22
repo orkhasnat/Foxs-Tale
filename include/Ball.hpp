@@ -2,6 +2,8 @@
 #define BALL_H
 
 #include "Platform.hpp"
+#include "Spike.hpp"
+#include "BouncyPlatform.hpp"
 #include "Queue.hpp"
 #include "SFML/Graphics.hpp"
 #include "Game.hpp"
@@ -19,7 +21,7 @@ public:
 
     Ball(Platform*);
     bool isFalling() const;
-    int findPlatform(Queue&);
+    int findPlatform(Queue<Platform*>&);
 };
 
 #endif
