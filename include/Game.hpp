@@ -19,7 +19,7 @@ private:
     int score, life, runspeed, slowdowntime;
     Queue platforms;
     Ball *ball;
-    sf::Texture texture;
+    sf::Texture texture, boostedTexture;
     sf::Sprite spikes;
     sf::Music playing;
     friend void Coin::bonus(int *_score);

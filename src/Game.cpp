@@ -133,6 +133,7 @@ void Game::manageevents()
         else if(event.type==sf::Event::KeyPressed) switch(event.key.code)
         {
         case sf::Keyboard::Left:
+            //moving fox spritesheet
             X++;
             if(X==4) {
                 X = 1, Y++;
@@ -149,6 +150,7 @@ void Game::manageevents()
             break;
 
         case sf::Keyboard::Right:
+            //moving fox spritesheet
             X++;
             if(X==4) {
                 X = 0, Y++;
@@ -381,25 +383,35 @@ void Game::getBonus()
 
     case booster:
         ball->standingOn->getItem()->bonus(&ball->isBoosted);
-        // ball->circle.setFillColor(sf::Color::Yellow);
-        // ball->circle.setOutlineColor(sf::Color::Red);
+
+        // Yellow
+        // texture.loadFromFile("data/img/Spikes_Flip.png");
+        // spikes.setTexture(texture);
+        // spikes.setTextureRect(sf::IntRect(0, 0, 400, 10));
+        boostedTexture.loadFromFile("data/img/yellow.png");//setting the first square
+        ball->fox.setTexture(boostedTexture);
         ball->isBoosted+=ball->isProtected;
         ball->isProtected=0;
         break;
 
     case protection:
         ball->standingOn->getItem()->bonus(&ball->isProtected);
-        // ball->circle.setFillColor(sf::Color::White);
-        // ball->circle.setOutlineColor(sf::Color::Blue);
+        // Blue;
+        boostedTexture.loadFromFile("data/img/blue.png");//setting the first square
+        ball->fox.setTexture(boostedTexture);
         ball->isProtected+=ball->isBoosted;
         ball->isBoosted=0;
         break;
 
     case slowdown:
+        boostedTexture.loadFromFile("data/img/running.png");//setting the first square
+        ball->fox.setTexture(boostedTexture);
         ball->standingOn->getItem()->bonus(&slowdowntime);
         break;
 
     case gem:
+        boostedTexture.loadFromFile("data/img/running.png");//setting the first square
+        ball->fox.setTexture(boostedTexture);
         ball->standingOn->getItem()->bonus(&life);
         break;
     }
