@@ -404,14 +404,14 @@ void Game::getBonus()
         break;
 
     case slowdown:
-        boostedTexture.loadFromFile("data/img/running.png");//setting the first square
-        ball->fox.setTexture(boostedTexture);
+        // boostedTexture.loadFromFile("data/img/running.png");//setting the first square
+        // ball->fox.setTexture(boostedTexture);
         ball->standingOn->getItem()->bonus(&slowdowntime);
         break;
 
     case gem:
-        boostedTexture.loadFromFile("data/img/running.png");//setting the first square
-        ball->fox.setTexture(boostedTexture);
+        // boostedTexture.loadFromFile("data/img/running.png");//setting the first square
+        // ball->fox.setTexture(boostedTexture);
         ball->standingOn->getItem()->bonus(&life);
         break;
     }
@@ -500,8 +500,8 @@ void Game::run()
 
                 if(!ball->isBoosted)
                 {
-                    // ball->circle.setFillColor(sf::Color::Red);
-                    // ball->circle.setOutlineColor(sf::Color::Black);
+                    boostedTexture.loadFromFile("data/img/running.png");//setting the first square
+                    ball->fox.setTexture(boostedTexture);
                 }
             }
             if(ball) if(ball->isProtected)
@@ -510,8 +510,8 @@ void Game::run()
 
                 if(!ball->isProtected)
                 {
-                    // ball->circle.setFillColor(sf::Color::Red);
-                    // ball->circle.setOutlineColor(sf::Color::Black);
+                    boostedTexture.loadFromFile("data/img/running.png");//setting the first square
+                    ball->fox.setTexture(boostedTexture);
                 }
             }
         }
