@@ -5,9 +5,11 @@
 
 class Protection : public Item
 {
+    friend class Platform;
     void setSprite(const int);
-public:
     Protection(int);
+
+public:
     void bonus(int*);
 };
 

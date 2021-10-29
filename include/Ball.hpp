@@ -16,10 +16,11 @@ class Ball
     friend void Boost::bonus(int *_isBoosted);
     friend void Protection::bonus(int *_isProtected);
 
+    Ball(Platform*);
+
 public:
     sf::CircleShape circle;
 
-    Ball(Platform*);
     bool isFalling() const;
     int findPlatform(Queue<Platform*>&);
 };
