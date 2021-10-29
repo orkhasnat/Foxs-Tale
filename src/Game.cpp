@@ -288,7 +288,7 @@ void Game::leftarrow()
     while(ballspeed--)
     {
         ball->fox.move(-1, 0);
-        if(ball->fox.getPosition().x-7-1<800) ball->fox.move(+1, 0);
+        if(ball->fox.getPosition().x-7-20<800) ball->fox.move(+1, 0);
 
         if((ball->findPlatform(platforms))==2) getBonus();
         if((ball->findPlatform(platforms))==3) burst();
@@ -303,7 +303,7 @@ void Game::rightarrow()
     while(ballspeed--)
     {
         ball->fox.move(1, 0);
-        if(ball->fox.getPosition().x+7+1>1200) ball->fox.move(-1, 0);
+        if(ball->fox.getPosition().x+7+20>1200) ball->fox.move(-1, 0);
 
         if((ball->findPlatform(platforms))==2) getBonus();
         if((ball->findPlatform(platforms))==3) burst();
