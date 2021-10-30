@@ -5,11 +5,12 @@
 
 class Boost : public Item
 {
+    friend class Platform;
+    Boost(int);
     void setSprite(const int);
 
 public:
-    Boost(int);
-    void bonus(int*);
+    void bonus(int *);
 };
 
 #endif

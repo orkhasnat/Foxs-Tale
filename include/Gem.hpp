@@ -5,11 +5,12 @@
 
 class Gem : public Item
 {
+    friend class Platform;
+    Gem(int);
     void setSprite(const int);
 
 public:
-    Gem(int);
-    void bonus(int*);
+    void bonus(int *);
 };
 
 #endif

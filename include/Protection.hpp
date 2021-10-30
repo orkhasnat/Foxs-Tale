@@ -5,10 +5,12 @@
 
 class Protection : public Item
 {
-    void setSprite(const int);
-public:
+    friend class Platform;
     Protection(int);
-    void bonus(int*);
+    void setSprite(const int);
+
+public:
+    void bonus(int *);
 };
 
 #endif
