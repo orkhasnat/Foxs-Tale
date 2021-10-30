@@ -17,8 +17,8 @@ class Ball
     friend void Protection::bonus(int *_isProtected);
 
 public:
-    sf::CircleShape circle;
-
+    sf::Texture texture;
+    sf::Sprite fox;
     Ball(Platform*);
     bool isFalling() const;
     int findPlatform(Queue<Platform*>&);
