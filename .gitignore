@@ -3,6 +3,5 @@
 *.out
 *.zip
 *.rar
-Makefile
 High_Score.txt
 bin/High_Score.txt
