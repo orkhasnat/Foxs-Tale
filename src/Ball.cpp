@@ -12,7 +12,7 @@ Ball::Ball(Platform* platform): standingOn(platform), isProtected(0), isBoosted(
     fox.setTextureRect(sf::IntRect(0, 0, 108, 108));
     platform->setballx(platform->sprite.getPosition().x + platform->getWidth()/2 + (1-2*(rand()&1))*(rand()%(platform->getWidth()/2-5)));
     fox.setOrigin(54, 80);
-    fox.setScale(0.7, 0.7);
+    fox.setScale(0.5, 0.5);
     fox.setPosition(platform->sprite.getPosition().x+platform->getballx(), platform->sprite.getPosition().y);
 }
 

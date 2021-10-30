@@ -29,10 +29,10 @@ int main()
         {
             Game game;
             game.run();
-          
-            int score=game.getScore();
 
-            if(records.size()<10)
+            int score = game.getScore();
+
+            if (records.size() < 10)
             {
                 drawrecord(score);
 
@@ -54,7 +54,7 @@ int main()
                 music.stop();
             }
 
-            else if(score > records.begin()->first)
+            else if (score > records.begin()->first)
             {
                 drawrecord(score);
 
@@ -78,7 +78,8 @@ int main()
             }
         }
 
-        else if(choice==2) displayrecords(records); //high scores
+        else if (choice == 2)
+            displayrecords(records); //high scores
         else if (choice == 3)
         {
             //instructions
@@ -87,6 +88,17 @@ int main()
             ins.push_back("Press <- to go Left");
             ins.push_back("Press -> to go Right");
             ins.push_back("Press Space to Pause");
+            ins.push_back("Powerups:");
+            ins.push_back("Eat the Yellow Coins");
+            ins.push_back("for Bonus");
+            ins.push_back("Eat the Cyan Gem for");
+            ins.push_back("a larger Bonus");
+            ins.push_back("Eat the Magenta Boost");
+            ins.push_back("for a Speed Boost");
+            ins.push_back("Eat the Green Blobs");
+            ins.push_back("for Protection against spikes");
+            ins.push_back("Eat the Blue balls");
+            ins.push_back("to Slowdown time");
             roll(ins);
         }
 
@@ -125,6 +137,7 @@ int main()
     }
 
     std::ofstream fout("data/High_Score.txt");
-    for(auto it=records.begin(); it!=records.end(); it++) fout << it->first<< '#' << it->second << '#';
+    for (auto it = records.begin(); it != records.end(); it++)
+        fout << it->first << '#' << it->second << '#';
     return 0;
 }
