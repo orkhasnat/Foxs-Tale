@@ -38,10 +38,6 @@ enum ItemType
 #define XCursor event.mouseMove.x*1280/window.getSize().x
 #define YCursor event.mouseMove.y*720/window.getSize().y
 
-void readrecords(std::set<std::pair<int, std::string>> &records, std::ifstream &fin); 
-void displayrecords(const std::set<std::pair<int, std::string>> records); 
-std::string getPlayerName(); 
-
 void icon();
 void intro();
 int menu();
@@ -54,10 +50,5 @@ void displayrecords(const std::set<std::pair<int, std::string>> &records);
 void drawrecord(int score);
 
 void roll(std::vector<std::string>& text);
-
-std::string scanfromscreen(sf::Text& text, sf::IntRect rect);
-void readrecords(std::set<std::pair<int, std::string>> &records, std::ifstream &fin);
-void displayrecords(const std::set<std::pair<int, std::string>> records);
-void drawrecord(int score);
 
 #endif
