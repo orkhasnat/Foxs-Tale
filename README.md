@@ -9,8 +9,9 @@ Options:
 > -cr - Compiles the project without the roll function (if compilcation arises)
 > clean - Deletes the .o files  
 > cleanall - Deletes the *.o and *.exe files  
-> -a/all - Does all the above except deleting the .exe file
->    git somehow corrupts the symbolic link thus execution failure
-> To execute run the executable
+> -a/all - Does all the above except deleting the .exe file  
+>    git somehow corrupts the symbolic link thus execution failure  
+> To execute the game run the executable  
+
 The .exe can be found in ./bin
 
