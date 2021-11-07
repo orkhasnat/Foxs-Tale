@@ -1,0 +1,5 @@
+#ifndef _resource_rc
+#define _resource_rc
+MAINICON ICON "bin/data/img/fox.ico"
+
+#endif

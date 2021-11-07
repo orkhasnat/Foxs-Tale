@@ -12,7 +12,7 @@ Options:
 > -a/all - Does all the above except deleting the .exe file  
 > To execute the game run the executable  
 
-The .exe can be found in ./bin
-The -a flag or -e doesnt execute properly due to failure to load resources.
+The .exe can be found in ./bin  
+The -a flag or -e doesnt execute properly due to failure to load resources.  
 Git somehow corrupts the symbolic link thus creates execution failure.  
 

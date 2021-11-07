@@ -4,6 +4,8 @@ function compilation{
     echo "........compilling.........."
     # remove the -D ROll if the roll func creates problem
     g++ -c .\src\*.cpp -I.\include -D ROLL
+    # resource file handling
+    windres icon.rc -o icon.o
     echo "..........moving............"
     #Move-Item -Path *.o -Destination .\obj -force
     echo ".........linking............"
@@ -15,6 +17,8 @@ function compilation{
 function withoutRoll{
     echo "........compilling.........."
     g++ -c .\src\*.cpp -I.\include 
+    # resource file handling
+    windres icon.rc -o icon.o
     echo "..........moving............"
     #Move-Item -Path *.o -Destination .\obj -force
     echo ".........linking............"
