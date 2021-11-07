@@ -7,7 +7,7 @@ function compilation{
     #Move-Item -Path *.o -Destination .\obj -force
     echo ".........linking............"
     #g++ -o Play .\obj\*.o main.o -L.\lib -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
-    g++ -o RapidRoll .\*.o -L.\lib -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system -mwindows
+    g++ -o RapidRoll .\*.o -L.\lib -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system #-mwindows
     mv .\RapidRoll.exe .\bin -force
     echo "...........done............."
 }
