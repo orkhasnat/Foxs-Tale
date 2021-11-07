@@ -10,8 +10,9 @@ Options:
 > clean - Deletes the .o files  
 > cleanall - Deletes the *.o and *.exe files  
 > -a/all - Does all the above except deleting the .exe file  
->    git somehow corrupts the symbolic link thus execution failure  
 > To execute the game run the executable  
 
 The .exe can be found in ./bin
+The -a flag or -e doesnt execute properly due to failure to load resources.
+Git somehow corrupts the symbolic link thus creates execution failure.  
 
