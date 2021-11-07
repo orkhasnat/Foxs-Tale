@@ -2,13 +2,24 @@
 
 function compilation{
     echo "........compilling.........."
-    g++ -c .\src\*.cpp -I.\include
+    # remove the -D ROll if the roll func creates problem
+    g++ -c .\src\*.cpp -I.\include -D ROLL
     echo "..........moving............"
     #Move-Item -Path *.o -Destination .\obj -force
     echo ".........linking............"
-    #g++ -o Play .\obj\*.o main.o -L.\lib -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
-    g++ -o RapidRoll .\*.o -L.\lib -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system -mwindows
-    mv .\RapidRoll.exe .\bin -force
+    # remove the -D ROll if the roll func creates problem
+    g++ -o "Fox's Tale" .\*.o -L.\lib -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system -mwindows -D ROLL
+    mv .\"Fox's Tale".exe .\bin -force
+    echo "...........done............."
+}
+function withoutRoll{
+    echo "........compilling.........."
+    g++ -c .\src\*.cpp -I.\include 
+    echo "..........moving............"
+    #Move-Item -Path *.o -Destination .\obj -force
+    echo ".........linking............"
+    g++ -o "Fox's Tale" .\*.o -L.\lib -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system -mwindows
+    mv .\"Fox's Tale".exe .\bin -force
     echo "...........done............."
 }
 
@@ -21,9 +32,9 @@ function cleaning{
 function cleaningall{
     echo "........cleaning.........."
     rm .\*.o
-    rm .\bin\RapidRoll.exe
-    #rm High_Score.txt
-    rm .\bin\data\High_Score.txt
+    rm .\bin\"Fox's Tale".exe
+    #rm hscore.savefile
+    rm .\bin\data\hscore.savefile
     echo "...........done............."
 }
 
@@ -40,20 +51,21 @@ function RunAgain{
             "help" {Helpmenu; Break}
             "compile" {compilation}
             "-c" {compilation}
+            "-cr" {withoutRoll}
             "clean" {cleaning}
             "cleanall" {cleaningall; Break}
-            "execute" {.\bin\RapidRoll.exe; Break}
-            "-e" {.\bin\RapidRoll.exe; Break}
+            "execute" {.\bin\"Fox's Tale".exe; Break}
+            "-e" {.\bin\"Fox's Tale".exe; Break}
             "all" {
                     compilation;
                     cleaning;
-                    .\bin\RapidRoll.exe;
+                    #.\bin\"Fox's Tale".exe;
                     Break
                     }
             "-a" {
                     compilation;
                     cleaning;
-                    .\bin\RapidRoll.exe;
+                    #.\bin\"Fox's Tale".exe;
                     Break
                 }
         }
@@ -67,20 +79,21 @@ switch ($params){
     "help" {Helpmenu; Break}
     "compile" {compilation}
     "-c" {compilation}
+    "-cr" {withoutRoll}
     "clean" {cleaning}
     "cleanall" {cleaningall; Break}
-    "execute" {.\bin\RapidRoll.exe; Break}
-    "-e" {.\bin\RapidRoll.exe; Break}
+    "execute" {.\bin\"Fox's Tale".exe; Break}
+    "-e" {.\bin\"Fox's Tale".exe; Break}
     "all" {
         compilation;
         cleaning;
-        .\bin\RapidRoll.exe;
+        #.\bin\"Fox's Tale".exe;
         Break
     }
     "-a" {
         compilation;
         cleaning;
-        .\bin\RapidRoll.exe;
+        #.\bin\"Fox's Tale".exe;
         Break
     }
 }

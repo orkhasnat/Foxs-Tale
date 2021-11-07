@@ -2,11 +2,6 @@
 
 Ball::Ball(Platform* platform): standingOn(platform), isProtected(0), isBoosted(0)
 {
-    // circle.setRadius(7);
-    // circle.setOutlineThickness(1);
-    // circle.setFillColor(sf::Color::Red);
-    // circle.setOutlineColor(sf::Color::Black);
-    // circle.setOrigin(circle.getRadius(), 2*circle.getRadius()+circle.getOutlineThickness());
     texture.loadFromFile("data/img/running.png");//setting the first square
     fox.setTexture(texture);
     fox.setTextureRect(sf::IntRect(0, 0, 108, 108));

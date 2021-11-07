@@ -27,7 +27,7 @@ void intro()
     sprite.setPosition(240, 0);
 
     sf::Music sound;
-    sound.openFromFile("data/audio/intro.ogg"); // The same music for the menu and the intro feels weird. A different music is recommended. Currently I have temporarily switched it back to the Rapid Roll intro.
+    sound.openFromFile("data/audio/intro.ogg"); 
     sound.setLoop(0);
     sound.setVolume(10);
     sound.play();
@@ -294,7 +294,7 @@ void displayrecords(const std::set<std::pair<int, std::string>> &records)
 {
     int i;
     sf::Music sound;
-    sound.openFromFile("data/audio/menu.ogg"); // A different music is recommended
+    sound.openFromFile("data/audio/menu.ogg");
     sound.setLoop(1);
     sound.setVolume(10);
     sound.play();
@@ -382,11 +382,13 @@ void drawrecord(int score)
     window.draw(text);
 }
 
+// may face issues with this function
+#ifdef ROLL
 void roll(std::vector<std::string> &text)
 {
     int i = 0;
     sf::Music sound;
-    sound.openFromFile("data/audio/menu.ogg"); // A different music is recommended
+    sound.openFromFile("data/audio/menu.ogg");
     sound.setLoop(1);
     sound.setVolume(10);
     sound.play();
@@ -454,3 +456,4 @@ void roll(std::vector<std::string> &text)
         window.display();
     }
 }
+#endif

@@ -16,7 +16,7 @@ int main()
     int choice;
 
     std::set<std::pair<int, std::string>> records;
-    std::ifstream fin("data/High_Score.txt");
+    std::ifstream fin("data/hscore.savefile");
 
     readrecords(records, fin);
     fin.close();
@@ -83,6 +83,7 @@ int main()
         else if (choice == 3)
         {
             //instructions
+            #ifdef ROLL
             std::vector<std::string> ins;
             ins.reserve(5);
             ins.push_back("Press <- to go Left");
@@ -100,17 +101,13 @@ int main()
             ins.push_back("Eat the Blue balls");
             ins.push_back("to Slowdown time");
             roll(ins);
+            #endif
         }
 
         else if (choice == 4)
         {
             //credits
-            // std::cout << '\n';
-            // std::cout << "Gameplay Concept:\nRapid Roll\nNokia\n\n";
-            // std::cout << "Backgrounds:\nThe First Tree\nBy David Wehle\n\n";
-            // std::cout << "Music:\n\"Gravity Falls Main Title Theme\"\nBy Brad Breeck\nFrom Gravity Falls- Created By Alex Hirsh\nA Television Animation By Disney\n\n\"Call of Destiny\"\nBy Josh Kramer\n\n";
-            // std::cout << "Intro Fox:\nTenor\nhttps://i2.wp.com/media1.tenor.com/images/ab80e83e9f913b87bb33cedf9cac2ef2/tenor.gif\n\n";
-
+            #ifdef ROLL
             std::vector<std::string> credits;
             credits.reserve(20);
             credits.push_back("Gameplay Concept:");
@@ -131,12 +128,13 @@ int main()
             credits.push_back("'Call of Destiny'");
             credits.push_back("By Josh Kramer");
             roll(credits);
+            #endif
         }
         else
             window.close();
     }
 
-    std::ofstream fout("data/High_Score.txt");
+    std::ofstream fout("data/hscore.savefile");
     for (auto it = records.begin(); it != records.end(); it++)
         fout << it->first << '#' << it->second << '#';
     return 0;

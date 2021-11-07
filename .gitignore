@@ -3,5 +3,7 @@
 *.out
 *.zip
 *.rar
-High_Score.txt
-bin/High_Score.txt
+hscore.savefile
+bin/hscore.savefile
+bin/data/hscore.savefile
+data/hscore.savefile

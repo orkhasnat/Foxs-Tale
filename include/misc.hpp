@@ -49,6 +49,7 @@ void readrecords(std::set<std::pair<int, std::string>> &records, std::ifstream &
 void displayrecords(const std::set<std::pair<int, std::string>> &records);
 void drawrecord(int score);
 
+#ifdef ROLL
 void roll(std::vector<std::string>& text);
-
+#endif
 #endif
