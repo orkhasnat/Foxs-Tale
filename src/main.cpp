@@ -16,7 +16,7 @@ int main()
     int choice;
 
     std::set<std::pair<int, std::string>> records;
-    std::ifstream fin("data/High_Score.txt");
+    std::ifstream fin("data/hscore.savefile");
 
     readrecords(records, fin);
     fin.close();
@@ -136,7 +136,7 @@ int main()
             window.close();
     }
 
-    std::ofstream fout("data/High_Score.txt");
+    std::ofstream fout("data/hscore.savefile");
     for (auto it = records.begin(); it != records.end(); it++)
         fout << it->first << '#' << it->second << '#';
     return 0;

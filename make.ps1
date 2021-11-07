@@ -22,8 +22,8 @@ function cleaningall{
     echo "........cleaning.........."
     rm .\*.o
     rm .\bin\RapidRoll.exe
-    #rm High_Score.txt
-    rm .\bin\data\High_Score.txt
+    #rm hscore.savefile
+    rm .\bin\data\hscore.savefile
     echo "...........done............."
 }
 
