@@ -7,7 +7,7 @@
 #include "Queue.hpp"
 #include "SFML/Graphics.hpp"
 #include "Game.hpp"
-
+#include <typeinfo>
 class Ball
 {
     int isProtected, isBoosted;

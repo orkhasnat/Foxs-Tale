@@ -106,7 +106,7 @@ int main()
 
         else if (choice == 4)
         {
-            //credits
+            // credits
             #ifdef ROLL
             std::vector<std::string> credits;
             credits.reserve(20);

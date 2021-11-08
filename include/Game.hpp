@@ -9,7 +9,7 @@
 #include "Spike.hpp"
 #include "MovingPlatform.hpp"
 #include "BouncyPlatform.hpp"
-
+#include <typeinfo>
 class Ball;
 
 class Game
