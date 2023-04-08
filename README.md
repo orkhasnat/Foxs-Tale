@@ -10,5 +10,5 @@ Options:
 > cleanall - Deletes the *.o and *.exe files  
 > -a/all - Does all the above except deleting the .exe file  
 
-The .exe can be found in ./bin
+The Play.exe can be found in ./bin
 
