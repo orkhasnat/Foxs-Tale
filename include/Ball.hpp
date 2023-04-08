@@ -7,21 +7,22 @@
 #include "Queue.hpp"
 #include "SFML/Graphics.hpp"
 #include "Game.hpp"
-#include <typeinfo>
+
 class Ball
 {
     int isProtected, isBoosted;
-    Platform *standingOn;
-    Ball(Platform *);
+    Platform* standingOn;
     friend class Game;
     friend void Boost::bonus(int *_isBoosted);
     friend void Protection::bonus(int *_isProtected);
 
+    Ball(Platform*);
+
 public:
-    sf::Texture texture;
-    sf::Sprite fox;
+    sf::CircleShape circle;
+
     bool isFalling() const;
-    int findPlatform(Queue<Platform *> &);
+    int findPlatform(Queue<Platform*>&);
 };
 
 #endif

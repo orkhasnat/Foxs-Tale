@@ -6,11 +6,11 @@
 class Gem : public Item
 {
     friend class Platform;
-    Gem(int);
     void setSprite(const int);
+    Gem(int);
 
 public:
-    void bonus(int *);
+    void bonus(int*);
 };
 
 #endif

@@ -5,10 +5,11 @@
 
 class SlowDown : public Item
 {
+    friend class Platform;
     void setSprite(const int);
+    SlowDown(int);
 
 public:
-    SlowDown(int);
     void bonus(int*);
 };
 

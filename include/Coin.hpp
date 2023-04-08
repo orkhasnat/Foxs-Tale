@@ -6,11 +6,11 @@
 class Coin : public Item
 {
     friend class Platform;
-    Coin(int);
     void setSprite(const int);
+    Coin(int);
 
 public:
-    void bonus(int *);
+    void bonus(int*);
 };
 
 #endif

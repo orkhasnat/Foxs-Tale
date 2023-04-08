@@ -9,7 +9,7 @@
 #include "Spike.hpp"
 #include "MovingPlatform.hpp"
 #include "BouncyPlatform.hpp"
-#include <typeinfo>
+
 class Ball;
 
 class Game
@@ -18,7 +18,7 @@ private:
     int score, life, runspeed, slowdowntime;
     Queue<Platform*> platforms;
     Ball *ball;
-    sf::Texture texture, boostedTexture;
+    sf::Texture texture;
     sf::Sprite spikes;
     sf::Music playing;
     friend void Coin::bonus(int *_score);
@@ -45,8 +45,7 @@ private:
 public:
     Game();
     ~Game();
-    int X = 0, Y = 0;
-
+    void addScore(int);
     int getScore() const;
     void run();
 

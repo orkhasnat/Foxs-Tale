@@ -1,10 +1,7 @@
 #ifndef MISC_H
 #define MISC_H
 
-#include <set>
-#include <utility>
-#include <fstream>
-#include <iostream>
+#include <bits/stdc++.h>
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
 
@@ -48,8 +45,9 @@ std::string scanfromscreen(sf::Text& text, sf::IntRect rect);
 void readrecords(std::set<std::pair<int, std::string>> &records, std::ifstream &fin);
 void displayrecords(const std::set<std::pair<int, std::string>> &records);
 void drawrecord(int score);
+bool newrecord(std::set<std::pair<int, std::string>> &records, int score);
+void addrecord(std::set<std::pair<int, std::string>> &records, int score);
 
-#ifdef ROLL
 void roll(std::vector<std::string>& text);
-#endif
+
 #endif

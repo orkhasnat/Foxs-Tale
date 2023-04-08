@@ -1,4 +1,5 @@
 #include "Game.hpp"
+
 void Game::newball()
 {
     Queue<Platform*> availablePlatforms;
@@ -112,14 +113,6 @@ void Game::manageevents()
         else if(event.type==sf::Event::KeyPressed) switch(event.key.code)
         {
         case sf::Keyboard::Left:
-            //moving fox spritesheet
-            X++;
-            if(X==4) {
-                X = 1, Y++;
-            }
-            if(Y == 4) Y = 0;
-            ball->fox.setTextureRect(sf::IntRect(X*108 + 108, Y*108, -108, 108));
-
             if(button)
             {
                 leftarrow();
@@ -129,18 +122,9 @@ void Game::manageevents()
             break;
 
         case sf::Keyboard::Right:
-            //moving fox spritesheet
-            X++;
-            if(X==4) {
-                X = 0, Y++;
-            }
-            if(Y == 4) Y = 0;
-            ball->fox.setTextureRect(sf::IntRect(X*108, Y*108, 108, 108));
-
             if(button)
             {
                 rightarrow();
-
                 if(!window.isOpen()) return;
                 button--;
             }
@@ -232,7 +216,7 @@ void Game::draw()
         window.draw(platforms[i]->sprite);
         if(platforms[i]->getItem()) window.draw(platforms[i]->getItem()->sprite);
     }
-    if(ball) window.draw(ball->fox);
+    if(ball) window.draw(ball->circle);
 }
 
 void Game::levitate(const int movement)
@@ -260,13 +244,12 @@ void Game::levitate(const int movement)
 
 void Game::leftarrow()
 {
-
     int ballspeed=8*(1+0.5*!!(ball->isBoosted));
 
     while(ballspeed--)
     {
-        ball->fox.move(-1, 0);
-        if(ball->fox.getPosition().x-7-20<800) ball->fox.move(+1, 0);
+        ball->circle.move(-1, 0);
+        if(ball->circle.getPosition().x-ball->circle.getRadius()-ball->circle.getOutlineThickness()<800) ball->circle.move(+1, 0);
 
         if((ball->findPlatform(platforms))==2) getBonus();
         if((ball->findPlatform(platforms))==3) burst();
@@ -275,13 +258,12 @@ void Game::leftarrow()
 
 void Game::rightarrow()
 {
-
     int ballspeed=8*(1+0.5*!!(ball->isBoosted));
 
     while(ballspeed--)
     {
-        ball->fox.move(1, 0);
-        if(ball->fox.getPosition().x+7+20>1200) ball->fox.move(-1, 0);
+        ball->circle.move(1, 0);
+        if(ball->circle.getPosition().x+ball->circle.getRadius()+ball->circle.getOutlineThickness()>1200) ball->circle.move(-1, 0);
 
         if((ball->findPlatform(platforms))==2) getBonus();
         if((ball->findPlatform(platforms))==3) burst();
@@ -302,7 +284,7 @@ void Game::fall()
         return;
     }
 
-    ball->fox.move(0, 10);
+    ball->circle.move(0, 10);
     if(land=ball->findPlatform(platforms))
     {
         if(land==2) getBonus();
@@ -313,11 +295,11 @@ void Game::fall()
 
     if(ball)
     {
-        ball->fox.move(0, 10);
+        ball->circle.move(0, 10);
         if(ball->findPlatform(platforms)==2) getBonus();
         else if(ball->findPlatform(platforms)==3) burst();
         else if(ball->findPlatform(platforms)==4) bounce();
-        else if(ball->fox.getPosition().y>=700) burst();
+        else if(ball->circle.getPosition().y>=700) burst();
     }
 }
 
@@ -327,15 +309,15 @@ void Game::bounce()
 
     for(int i=5-rand()%5; i; i--)
     {
-        ball->fox.move(0, -20);
+        ball->circle.move(0, -20);
         if(ball->findPlatform(platforms))
         {
-            ball->fox.move(0, 40);
+            ball->circle.move(0, 40);
             ball->standingOn=nullptr;
             return;
         }
 
-        if(ball->fox.getPosition().y-2*7-1<=110)
+        if(ball->circle.getPosition().y-2*ball->circle.getRadius()-ball->circle.getOutlineThickness()<=110)
         {
             burst();
             return;
@@ -361,35 +343,25 @@ void Game::getBonus()
 
     case booster:
         ball->standingOn->getItem()->bonus(&ball->isBoosted);
-
-        // Yellow
-        // texture.loadFromFile("data/img/Spikes_Flip.png");
-        // spikes.setTexture(texture);
-        // spikes.setTextureRect(sf::IntRect(0, 0, 400, 10));
-        boostedTexture.loadFromFile("data/img/yellow.png");//setting the first square
-        ball->fox.setTexture(boostedTexture);
+        ball->circle.setFillColor(sf::Color::Yellow);
+        ball->circle.setOutlineColor(sf::Color::Red);
         ball->isBoosted+=ball->isProtected;
         ball->isProtected=0;
         break;
 
     case protection:
         ball->standingOn->getItem()->bonus(&ball->isProtected);
-        // Blue;
-        boostedTexture.loadFromFile("data/img/blue.png");//setting the first square
-        ball->fox.setTexture(boostedTexture);
+        ball->circle.setFillColor(sf::Color::White);
+        ball->circle.setOutlineColor(sf::Color::Blue);
         ball->isProtected+=ball->isBoosted;
         ball->isBoosted=0;
         break;
 
     case slowdown:
-        // boostedTexture.loadFromFile("data/img/running.png");//setting the first square
-        // ball->fox.setTexture(boostedTexture);
         ball->standingOn->getItem()->bonus(&slowdowntime);
         break;
 
     case gem:
-        // boostedTexture.loadFromFile("data/img/running.png");//setting the first square
-        // ball->fox.setTexture(boostedTexture);
         ball->standingOn->getItem()->bonus(&life);
         break;
     }
@@ -400,7 +372,7 @@ void Game::getBonus()
 void Game::burst()
 {
     sf::Music burstingball;
-    burstingball.openFromFile("data/audio/burst.ogg");
+    burstingball.openFromFile("../data/audio/burst.ogg");
     burstingball.setLoop(0);
     burstingball.setVolume(10);
 
@@ -437,12 +409,12 @@ Game::Game(): score(0), life(3), runspeed(1), slowdowntime(0)
         }
     }
 
-    texture.loadFromFile("data/img/Spikes_Flip.png");
+    texture.loadFromFile("../data/img/Spikes_Flip.png");
     spikes.setTexture(texture);
     spikes.setTextureRect(sf::IntRect(0, 0, 400, 10));
     spikes.setPosition(800, 100);
 
-    playing.openFromFile("data/audio/playing.ogg");
+    playing.openFromFile("../data/audio/playing.ogg");
     playing.setVolume(10);
     playing.setLoop(true);
 }
@@ -482,7 +454,7 @@ void Game::run()
         if(ball)
         {
             if(ball->isFalling()) fall();
-            if(ball) if(ball->standingOn) ball->fox.setPosition(ball->standingOn->sprite.getPosition().x+ball->standingOn->getballx(), ball->standingOn->sprite.getPosition().y);
+            if(ball) if(ball->standingOn) ball->circle.setPosition(ball->standingOn->sprite.getPosition().x+ball->standingOn->getballx(), ball->standingOn->sprite.getPosition().y);
 
             if(!window.isOpen()) continue;
 
@@ -492,8 +464,8 @@ void Game::run()
 
                 if(!ball->isBoosted)
                 {
-                    boostedTexture.loadFromFile("data/img/running.png");//setting the first square
-                    ball->fox.setTexture(boostedTexture);
+                    ball->circle.setFillColor(sf::Color::Red);
+                    ball->circle.setOutlineColor(sf::Color::Black);
                 }
             }
             if(ball) if(ball->isProtected)
@@ -502,8 +474,8 @@ void Game::run()
 
                 if(!ball->isProtected)
                 {
-                    boostedTexture.loadFromFile("data/img/running.png");//setting the first square
-                    ball->fox.setTexture(boostedTexture);
+                    ball->circle.setFillColor(sf::Color::Red);
+                    ball->circle.setOutlineColor(sf::Color::Black);
                 }
             }
         }

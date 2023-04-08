@@ -6,11 +6,11 @@
 class Protection : public Item
 {
     friend class Platform;
-    Protection(int);
     void setSprite(const int);
+    Protection(int);
 
 public:
-    void bonus(int *);
+    void bonus(int*);
 };
 
 #endif

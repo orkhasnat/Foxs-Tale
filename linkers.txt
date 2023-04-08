@@ -1,0 +1,4 @@
+sfml-graphics
+sfml-audio
+sfml-window
+sfml-system

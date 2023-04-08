@@ -1,10 +1,2 @@
 *.o
 *.exe
-*.out
-*.zip
-*.rar
-hscore.savefile
-bin/hscore.savefile
-bin/data/hscore.savefile
-data/hscore.savefile
-~$Fox's Tale.pptx
