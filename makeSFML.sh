@@ -26,6 +26,7 @@ function compile {
     for file in "$srcDir"/*.cpp; do
         g++ -c "$file" -I"$includeDir" -o "$binDir/$(basename "${file%.cpp}.o")"
     done
+    echo "Done!"
     
     echo "Linking..."
     linkerOptions=()

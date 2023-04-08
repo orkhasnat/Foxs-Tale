@@ -3,6 +3,7 @@ $srcDir = "$homeDir\src"
 $includeDir = "$homeDir\include"
 $libDir = "$homeDir\lib"
 $binDir = "$homeDir\bin"
+$dataDir = "$homeDir\data"
 
 function Help {
     Write-Output @"
@@ -24,6 +25,7 @@ function Compile {
     foreach ($file in Get-ChildItem -Path $srcDir -Filter *.cpp) {
         g++ -c "$($file.FullName)" -I"$includeDir" -o "$binDir\$($file.Name.Replace('.cpp','.o'))"
     }
+    Write-Output "Done!"
     
     Write-Output "Linking..."
     $linkers = Get-Content "$homeDir\linkers.txt"
@@ -54,6 +56,9 @@ function Clean {
     Write-Output "Cleaning..."
     if (Test-Path -Path "$binDir\*.o") {
         Remove-Item -Path "$binDir\*.o" -Force -Recurse
+    }
+    if (Test-Path -Path "$dataDir\High_Score.txt") {
+        Remove-Item -Path "$dataDir\High_Score.txt" -Force
     }
     Write-Output "Done!"
 }
