@@ -15,7 +15,7 @@ void SlowDown::setSprite(const int x)
     sprite.setPosition(x, 680);
 }
 
-void SlowDown::bonus(int *_slowdowntime)
+void SlowDown::bonus(int *slowdowntime)
 {
-    *_slowdowntime+=19+(rand()&31);
+    *slowdowntime+=19+(rand()&31);
 }

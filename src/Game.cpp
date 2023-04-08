@@ -9,7 +9,7 @@ void Game::newball()
     ball=new Ball(availablePlatforms[2+rand()%(availablePlatforms.size()-2)]);
 }
 
-void Game::newPlatform(PlatformType platformtype = regular)
+void Game::platformFactory(PlatformType platformtype = regular)
 {
     int temp=rand()%401;
     if(temp<100 && !(rand()&7)) temp=0;
@@ -24,7 +24,7 @@ void Game::newPlatform(PlatformType platformtype = regular)
 
     case 11 ... 15:
         if(!score) break;
-        itemtype=booster;
+        itemtype=boost;
         break;
 
     case 16 ... 20:
@@ -67,8 +67,8 @@ void Game::newPlatform(PlatformType platformtype = regular)
 
 void Game::addPlatform()
 {
-    if(platforms.back()->sprite.getPosition().y<700-200) newPlatform();
-    else if(platforms.back()->sprite.getPosition().y<700-100) if(rand()%5<3) newPlatform();
+    if(platforms.back()->sprite.getPosition().y<700-200) platformFactory();
+    else if(platforms.back()->sprite.getPosition().y<700-100) if(rand()%5<3) platformFactory();
 
     if(platforms.back()->sprite.getPosition().y>=700-100) return;
     if(platforms.size()<4) return;
@@ -79,21 +79,21 @@ void Game::addPlatform()
         Platform* temp=platforms[platforms.size()-1-i];
         if(temp->getPlatformType()!=regular) return;
     }
-    if(score>1000) if(!(rand()%10)) newPlatform(moving);
+    if(score>1000) if(!(rand()%10)) platformFactory(moving);
 
     for(int i=0; i<4; i++)
     {
         Platform* temp=platforms[platforms.size()-1-i];
         if(temp->getPlatformType()!=regular) return;
     }
-    if(score>1000) if(!(rand()%10)) newPlatform(bouncing);
+    if(score>1500) if(!(rand()%10)) platformFactory(bouncing);
 
     for(int i=0; i<4; i++)
     {
         Platform* temp=platforms[platforms.size()-1-i];
         if(temp->getPlatformType()!=regular) return;
     }
-    if(rand()%5<3) newPlatform(spike);
+    if(rand()%5<3) platformFactory(spike);
 }
 
 void Game::manageevents()
@@ -152,7 +152,7 @@ void Game::pause()
 
             else if(event.type==sf::Event::Resized)
             {
-                draw();
+                drawall();
                 window.display();
             }
 
@@ -204,7 +204,7 @@ void Game::drawremaining() const
     }
 }
 
-void Game::draw()
+void Game::drawall()
 {
     drawbg();
     drawremaining();
@@ -341,7 +341,7 @@ void Game::getBonus()
         }
         break;
 
-    case booster:
+    case boost:
         ball->standingOn->getItem()->bonus(&ball->isBoosted);
         ball->circle.setFillColor(sf::Color::Yellow);
         ball->circle.setOutlineColor(sf::Color::Red);
@@ -383,7 +383,7 @@ void Game::burst()
 
     if(life) newball();
     if(ball) if(ball->findPlatform(platforms)==2) getBonus();
-    draw();
+    drawall();
     window.display();
 
     burstingball.play();
@@ -393,7 +393,7 @@ void Game::burst()
 
 Game::Game(): score(0), life(3), runspeed(1), slowdowntime(0)
 {
-    newPlatform();
+    platformFactory();
     levitate(15+rand()%5);
 
     while(1)
@@ -437,13 +437,13 @@ int Game::getScore() const
 void Game::run()
 {
     playing.play();
-    draw();
+    drawall();
     window.display();
     pause();
 
     while(window.isOpen() && life)
     {
-        draw();
+        drawall();
         window.display();
 
         manageevents();

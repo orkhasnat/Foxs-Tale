@@ -15,7 +15,7 @@ void Coin::setSprite(const int x)
     sprite.setPosition(x, 680);
 }
 
-void Coin::bonus(int *_score)
+void Coin::bonus(int *score)
 {
-    *_score+=100+rand()%200;
+    *score+=100+rand()%201;
 }

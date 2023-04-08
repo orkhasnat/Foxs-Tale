@@ -28,7 +28,7 @@ public:
     void setballx(int);
     int getballx() const;
     Item* getItem() const;
-    int getItemType() const;
+    ItemType getItemType() const;
     int getPlatformType() const;
     bool checkpickup() const;
     void pickup();

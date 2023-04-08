@@ -26,14 +26,14 @@ private:
     friend void SlowDown::bonus(int *_runspeed);
 
     void newball();
-    void newPlatform(PlatformType);
+    void platformFactory(PlatformType);
     void addPlatform();
     void manageevents();
     void pause();
     void levelcheck(int);
     void drawscore() const;
     void drawremaining() const;
-    void draw();
+    void drawall();
     void levitate(const int);
     void leftarrow();
     void rightarrow();

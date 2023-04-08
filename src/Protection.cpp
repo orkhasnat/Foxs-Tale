@@ -15,7 +15,7 @@ void Protection::setSprite(const int x)
     sprite.setPosition(x, 680);
 }
 
-void Protection::bonus(int *_protection)
+void Protection::bonus(int *protection)
 {
-    *_protection+=19+(rand()&31);
+    *protection+=19+(rand()&31);
 }

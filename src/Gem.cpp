@@ -15,7 +15,7 @@ void Gem::setSprite(const int x)
     sprite.setPosition(x, 680);
 }
 
-void Gem::bonus(int *_life)
+void Gem::bonus(int *life)
 {
-    *_life=std::min(*_life+1, 6);
+    *life=std::min(*life+1, 6);
 }

@@ -20,7 +20,7 @@ Platform::Platform(int x, const ItemType _itemtype): width(50+rand()%21+rand()%2
         item=new Coin(x+rand()%(width-10));
         break;
 
-    case booster:
+    case boost:
         item=new Boost(x+rand()%(width-10));
         break;
 
@@ -59,7 +59,7 @@ Item* Platform::getItem() const
 {
     return item;
 }
-int Platform::getItemType() const
+ItemType Platform::getItemType() const
 {
     return itemtype;
 }

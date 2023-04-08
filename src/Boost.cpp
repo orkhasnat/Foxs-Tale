@@ -15,7 +15,7 @@ void Boost::setSprite(const int x)
     sprite.setPosition(x, 680);
 }
 
-void Boost::bonus(int *_isBoosted)
+void Boost::bonus(int *isBoosted)
 {
-    *_isBoosted+=19+(rand()&31);
+    *isBoosted+=19+(rand()&31);
 }
