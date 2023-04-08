@@ -1,7 +1,5 @@
 *.o
 *.exe
-*.o
-*.exe
 *.out
 *.zip
 *.rar
