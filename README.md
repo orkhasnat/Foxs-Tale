@@ -7,8 +7,8 @@ Rapid Roll Advanced is a game developed using C++ and SFML. It takes inspiration
     - Coin: This item gives a score bonus.
     - Gem: This item grants an extra life to the player.
     - Boost: This item accelerates the ball. Although it is difficult to control initially, with practice, skilled players can learn to take advantage of its increased velocity.
-    - Protection: This item grants temporary invincibility, allowing you to pass through spikes unharmed. It's a game-changer when you're playing at higher levels.
-    - Slowdown: This item slows down time, making it easier to navigate through obstacles and spikes. It's a very helpful item in the later part of the game.
+    - Protection: This item grants temporary invincibility, allowing you to pass through spikes unharmed.
+    - Slowdown: This item slows down time, making it easier to navigate through obstacles and spikes.  It's a game-changer in the later part of the game.
 - **New Challenges**
 As your score increases, new challenges appear to make the game more difficult and interesting.
     - Moving Platforms: These platforms move horizontally, vertically, or both. They require precise timing and control to pass.
