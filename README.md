@@ -4,7 +4,7 @@ Rapid Roll Advanced is a game developed using C++ and SFML. It takes inspiration
 ## Features
 - Realistic Physics: The physics of the game is implemented to provide players with a smooth and responsive gameplay experience, challenging their reflexes and providing an adrenaline rush that makes the game more immersive.
 - **New Challenges**
-As your score increases, new challenges appear to make the game more difficult and interesting.
+    As your score increases, new challenges appear to make the game more difficult and interesting.
     - Moving Platforms: These platforms move both horizontally and vertically.
     - Spikes: These sharp and pointy hazards instantly destroy the ball. Players must plan their movements carefully to navigate around them and avoid losing the game.
     - Bouncy Platforms: These platforms add a fun element to the game by bouncing the ball. However, there is a danger that you may collide with the ceiling.
