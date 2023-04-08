@@ -1,0 +1,7 @@
+FIX THIS
+The objective of the game is to control a ball that rolls down through a series of rising platforms while avoiding obstacles and collecting bonuses. The game ends if the ball falls off the bottom of the screen, hits the ceiling, or collides with an obstacle.
+Use the arrow keys to move the ball left and right.
+Press the spacebar to pause the game.
+The difficulty of the game increases as the score increases.
+DESCRIBE THE PLATFORMS
+DESCRIBE THE ITEMS
