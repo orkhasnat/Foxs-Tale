@@ -6,4 +6,5 @@
 *.zip
 *.rar
 hscore.savefile
+data/High_Score.txt
 data/hscore.savefile
