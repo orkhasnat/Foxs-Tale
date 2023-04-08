@@ -1,2 +1,10 @@
 *.o
 *.exe
+*.o
+*.exe
+*.out
+*.zip
+*.rar
+hscore.savefile
+data/hscore.savefile
+data/High_score.txt
