@@ -1,5 +1,5 @@
 #ifndef _resource_rc	
 #define _resource_rc	
-MAINICON ICON "bin/data/img/fox.ico"	
+MAINICON ICON "bin/data/img/RR.ico"	
 
 #endif
