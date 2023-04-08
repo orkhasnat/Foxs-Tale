@@ -365,68 +365,86 @@ void addrecord(std::set<std::pair<int, std::string>> &records, int score)
     music.stop();
 }
 
-/*void roll(std::vector<std::string>& text)
+std::vector<std::string> readlines(const std::string& filename)
 {
-    int i=0;
-    sf::Music sound;
-    sound.openFromFile("../data/audio/menu.ogg"); // A different music is recommended
-    sound.setLoop(1);
-    sound.setVolume(10);
-    sound.play();
-    sf::Text lines;
-
-    lines.setFont(ArchitectsDaughter);
-    lines.setCharacterSize(25);
-    lines.setFillColor(sf::Color::White);
-    lines.setOutlineThickness(2);
-    lines.setOutlineColor(sf::Color::Black);
-    lines.setStyle(sf::Text::Bold);
-    lines.setPosition(810, 650);
-
-    lines.setString("Something");
-    int h=lines.getGlobalBounds().height;
-    lines.setString(text[i]);
-
-    clk.restart();
-
-    while(window.isOpen())
-    {
-        while(window.pollEvent(event))
-        {
-            if(event.type==sf::Event::Closed)
-            {
-                window.close();
-                return;
-            }
-
-            if(event.type==sf::Event::KeyPressed || (event.type==sf::Event::MouseButtonPressed && event.mouseButton.button==sf::Mouse::Left)) return;
-        }
-
-        if(clk.getElapsedTime().asMilliseconds()>500) // Check the time
-        {
-            i++;
-            lines.move(0, -h);
-            if(i<text.size()) lines.setString(lines.getString()+"\n"+text[i]);
-
-            if(lines.getPosition().y<100)
-            {
-                lines.move(0, h);
-                int j;
-
-                std::string str=lines.getString();
-                for(j=0; j<str.size(); j++) if(str[j]=='\n') break;
-                if(j<str.size()) lines.setString(str.substr(j+1, str.size()));
-                else lines.setString("");
-            }
-
-            clk.restart();
-        }
-
-        if(!lines.getString().getSize()) return;
-
-        drawbg();
-        drawframe();
-        window.draw(lines);
-        window.display();
+    std::ifstream file(filename);
+    std::vector<std::string> lines;
+    std::string line;
+    while (std::getline(file, line)) {
+        lines.push_back(line);
     }
-}*/
+    return lines;
+}
+
+// void roll(std::vector<std::string> &text)
+// {
+//     int i = 0;
+//     sf::Music sound;
+//     sound.openFromFile("data/audio/menu.ogg"); // A different music is recommended
+//     sound.setLoop(1);
+//     sound.setVolume(10);
+//     sound.play();
+//     sf::Text lines;
+
+//     lines.setFont(ArchitectsDaughter);
+//     lines.setCharacterSize(25);
+//     lines.setFillColor(sf::Color::White);
+//     lines.setOutlineThickness(2);
+//     lines.setOutlineColor(sf::Color::Black);
+//     lines.setStyle(sf::Text::Bold);
+//     lines.setPosition(810, 650);
+
+//     lines.setString("Something");
+//     int h = lines.getGlobalBounds().height;
+//     lines.setString(text[i]);
+
+//     clk.restart();
+
+//     while (window.isOpen())
+//     {
+//         while (window.pollEvent(event))
+//         {
+//             if (event.type == sf::Event::Closed)
+//             {
+//                 window.close();
+//                 return;
+//             }
+
+//             if (event.type == sf::Event::KeyPressed || (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left))
+//                 return;
+//         }
+
+//         if (clk.getElapsedTime().asMilliseconds() > 500) // Check the time
+//         {
+//             i++;
+//             lines.move(0, -h);
+//             if (i < text.size())
+//                 lines.setString(lines.getString() + "\n" + text[i]);
+
+//             if (lines.getPosition().y < 100)
+//             {
+//                 lines.move(0, h);
+//                 int j;
+
+//                 std::string str = lines.getString();
+//                 for (j = 0; j < str.size(); j++)
+//                     if (str[j] == '\n')
+//                         break;
+//                 if (j < str.size())
+//                     lines.setString(str.substr(j + 1, str.size()));
+//                 else
+//                     lines.setString("");
+//             }
+
+//             clk.restart();
+//         }
+
+//         if (!lines.getString().getSize())
+//             return;
+
+//         drawbg();
+//         drawframe();
+//         window.draw(lines);
+//         window.display();
+//     }
+// }

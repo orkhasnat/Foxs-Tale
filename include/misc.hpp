@@ -48,6 +48,7 @@ void drawrecord(int score);
 bool newrecord(std::set<std::pair<int, std::string>> &records, int score);
 void addrecord(std::set<std::pair<int, std::string>> &records, int score);
 
+std::vector<std::string> readlines(const std::string& filename);
 void roll(std::vector<std::string>& text);
 
 #endif
