@@ -5,6 +5,8 @@
 *.out
 *.zip
 *.rar
+*.lnk
+
 hscore.savefile
 data/hscore.savefile
 data/High_Score.txt
