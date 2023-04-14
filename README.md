@@ -10,20 +10,33 @@ Watch here: https://youtu.be/CMADuLaDrM8
 <img src="https://i.ibb.co/d0s7SQh/Picture4.png" alt="Picture4" border="0">
 <img src="https://i.ibb.co/zhVFhSR/mpv-shot0001.jpg" alt="mpv-shot0001" border="0"> 
 
-## For Windows
-Run make.ps1 using powershell.  
-Options:   
-> -h/help - Shows help menu  
-> -c/compile - Compiles the project  
-> -cr - Compiles the project without the roll function (if compilcation arises)
-> clean - Deletes the .o files  
-> cleanall - Deletes the *.o and *.exe files  
-> -a/all - Does all the above except deleting the .exe file  
-> To execute the game run the executable  
-
-The .exe can be found in ./bin  
-The -a flag or -e doesnt execute properly due to failure to load resources.  
-Git somehow corrupts the symbolic link thus creates execution failure.  
+## Installation
+- ### **Installer**
+    You can install the game directly from this [link](https://github.com/orkhasnat/Foxs-Tale/releases/download/v1.01/Setup.exe).
+- ### **Manual Compilation**
+    Alternatively, you can choose to manually compile the game yourself using the provided source code. To do this, you will need to have the SFML library installed, but don't worry - we have included the version we used in our development process to make it easier for you (Windows Only).
+    - #### **For Windows**
+        Simply run the powershell script make.ps1.
+        ```
+        Options:   
+        > -h/help - Shows help menu  
+        > -c/compile - Compiles the project  
+        > -cr - Compiles the project without the roll function (if compilcation arises)
+        > clean - Deletes the .o files  
+        > cleanall - Deletes the *.o and *.exe files  
+        > -a/all - Does all the above except deleting the .exe file  
+        ```
+        To execute the game, run the Fox's Tale.exe file located in the bin folder. Please note that the -a flag and -e option do not execute properly due to a known issue with loading resources. Additionally, Git may corrupt the symbolic link, resulting in an execution failure. The compiled Fox's Tale.exe file can be found in the ./bin directory.
+        
+        Note: If you are using PowerShell on Windows and encounter an error message about script execution being disabled, you can enable script execution by opening a PowerShell session as an administrator and running the following command:
+        ```Set-ExecutionPolicy RemoteSigned```
+        This command sets the execution policy to allow local and remote signed scripts to run on the system. Once you've run this command, you should be able to execute the PowerShell script without any issues.
+    - #### **For GNU/Linux**
+        To compile the game, you'll need to install the SFML library. Depending on your distribution, you can use your package manager to install the SFML package. For example, on Arch Linux, the package is called ```sfml```, and on Ubuntu/Debian and it's deriavatives, it's ```libsfml-dev```. Once you've installed SFML, open a terminal in the project directory and run the make command. This will compile the game and create the executable in the bin directory. To clean up the object files and the executable, run the ```make clean``` command.
+        You can run the ```desktop``` target to create a desktop entry for the game. The entry will be created on the current user's desktop and will include the game name, an icon, and a command to run the executable. Note that the icon file ```icon.ico``` should be present in the root directory of the project for the entry to display correctly.
+        
+        If you need help with the available commands, run ```make help``` in the terminal. This will display a list of available commands along with a brief description of each command.
+        Also this might also work on MacOS but I can't really test that. 
 
 
 ## Features
@@ -42,7 +55,7 @@ Git somehow corrupts the symbolic link thus creates execution failure.
 - High Score System: The high-score system allows players to keep track of their personal best scores and compete with friends, making every playthrough a chance to set a new record.
 
 ## Technologies Used
-Rapid Roll Advanced was developed using C++ and the SFML (Simple and Fast Multimedia Library) library. The project used various object-oriented programming concepts, including encapsulation, inheritance, polymorphism, function and operator overloading, templates, virtual and abstract functions, enumerations, and exceptions.
+Rapid Roll Advanced was developed using C++ and the SFML (Simple and Fast Multimedia Library) library. The project used various object-oriented programming concepts, including encapsulation, inheritance, polymorphism, function and operator overloading, templates, virtual and abstract functions, enumerations, and exceptions. Also the installation files were made using Inno Setup.
 
 ## Feedback and Suggestions
 If you have any feedback or suggestions for improvements, please feel free to contact us by sending an email to tasnimulhasnat@iut-dhaka.edu. We are always looking for ways to make the game even better.
