@@ -34,11 +34,11 @@ Git somehow corrupts the symbolic link thus creates execution failure.
     - Spikes: These sharp and pointy hazards instantly destroy the ball. Players must plan their movements carefully to navigate around them and avoid losing the game.
     - Bouncy Platforms: These platforms add a fun element to the game by bouncing the ball. However, there is a danger that you may collide with the ceiling.
 - **Pickup Items**
-    - <span style="background-color: yellow; width: 0.8em; height: 0.8em; display: inline-block;"></span> Coin: This item gives a score bonus.
-    - <span style="background-color: cyan; width: 0.8em; height: 0.8em; display: inline-block;"></span> Gem: This item grants an extra life to the player.
-    - <span style="background-color: magenta; width: 0.8em; height: 0.8em; display: inline-block;"></span> Boost: This item accelerates the ball. Although it is difficult to control initially, with practice, skilled players can learn to take advantage of its increased velocity.
-    - <span style="background-color: green; width: 0.8em; height: 0.8em; display: inline-block;"></span> Protection: This item grants temporary invincibility, allowing you to pass through spikes unharmed.
-    - <span style="background-color: blue; width: 0.8em; height: 0.8em; display: inline-block;"></span> Slowdown: This item slows down time, making it easier to navigate through obstacles and spikes. It's a game-changer in the later part of the game.
+    - Coin: This item gives a score bonus.
+    - Gem: This item grants an extra life to the player.
+    - Boost: This item accelerates the ball. Although it is difficult to control initially, with practice, skilled players can learn to take advantage of its increased velocity.
+    - Protection: This item grants temporary invincibility, allowing you to pass through spikes unharmed.
+    - Slowdown: This item slows down time, making it easier to navigate through obstacles and spikes. It's a game-changer in the later part of the game.
 - High Score System: The high-score system allows players to keep track of their personal best scores and compete with friends, making every playthrough a chance to set a new record.
 
 ## Technologies Used
