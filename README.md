@@ -43,3 +43,8 @@ Git somehow corrupts the symbolic link thus creates execution failure.
 
 ## Technologies Used
 Rapid Roll Advanced was developed using C++ and the SFML (Simple and Fast Multimedia Library) library. The project used various object-oriented programming concepts, including encapsulation, inheritance, polymorphism, function and operator overloading, templates, virtual and abstract functions, enumerations, and exceptions.
+
+## Feedback and Suggestions
+If you have any feedback or suggestions for improvements, please feel free to contact us by sending an email to tasnimulhasnat@iut-dhaka.edu. We are always looking for ways to make the game even better.
+
+### Enjoy the Game!
