@@ -40,7 +40,7 @@ Watch here: https://youtu.be/CMADuLaDrM8
 
 
 ## Features
-- Realistic Physics: The physics of the game is implemented to provide players with a smooth and responsive gameplay experience, challenging their reflexes and providing an adrenaline rush that makes the game more immersive.
+- **Realistic Physics**: The physics of the game is implemented to provide players with a smooth and responsive gameplay experience, challenging their reflexes and providing an adrenaline rush that makes the game more immersive.
 - **New Challenges**
     As your score increases, new challenges appear to make the game more difficult and interesting.
     - Moving Platforms: These platforms move both horizontally and vertically.
@@ -52,7 +52,7 @@ Watch here: https://youtu.be/CMADuLaDrM8
     - Boost: This item accelerates the ball. Although it is difficult to control initially, with practice, skilled players can learn to take advantage of its increased velocity.
     - Protection: This item grants temporary invincibility, allowing you to pass through spikes unharmed.
     - Slowdown: This item slows down time, making it easier to navigate through obstacles and spikes. It's a game-changer in the later part of the game.
-- High Score System: The high-score system allows players to keep track of their personal best scores and compete with friends, making every playthrough a chance to set a new record.
+- **High Score System**: The high-score system allows players to keep track of their personal best scores and compete with friends, making every playthrough a chance to set a new record.
 
 ## Technologies Used
 Rapid Roll Advanced was developed using C++ and the SFML (Simple and Fast Multimedia Library) library. The project used various object-oriented programming concepts, including encapsulation, inheritance, polymorphism, function and operator overloading, templates, virtual and abstract functions, enumerations, and exceptions. Also the installation files were made using Inno Setup.
